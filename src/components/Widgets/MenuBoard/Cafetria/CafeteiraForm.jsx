@@ -11,16 +11,15 @@ const CafeTeriaForm = ({ card }) => {
   const [dataFeed, setDataFeed] = useState("");
   const [duration, setDuration] = useState("");
   const [noMealMessage, setNoMealMessage] = useState("");
-  const [titleFontColor, setTitleFontColor] = useState("");
-  const [cardFontColor, setCardFontColor] = useState("");
-  const [highlightColor, setHighlightColour] = useState("");
-
-  const [customBgColor, setCustomBgColor] = useState("");
+  const [textFont, setTextFont] = useState("Arial");
+  const [itemsFontColor, setItemsFontColor] = useState("#000000");
+  const [mealFontColor, setMealFontColor] = useState("#000000");
+  const [highlightColor, setHighlightColor] = useState("#000000");
+  const [cardBgColor, setCardBgColor] = useState("#ffffff");
+  const [customBgColor, setCustomBgColor] = useState("#ffffff");
   const [customBgImage, setCustomBgImage] = useState(null);
-  const [disableBackground, setDisableBackground] = useState(false);
+  const [showOnlyToday, setShowOnlyToday] = useState(false);
   const [disableAnimations, setDisableAnimations] = useState(false);
-  const [showCurrentMonth, setShowCurrentMonth] = useState(true);
-  const [hideDates, setHideDates] = useState(false);
   const [dataFeedFile, setDataFeedFile] = useState(null);
 
   const [language, setLanguage] = useState("en");
@@ -55,15 +54,16 @@ const CafeTeriaForm = ({ card }) => {
       appName,
       tags,
       duration,
-      titleFontColor,
-      cardFontColor,
+      noMealMessage,
+      textFont,
+      itemsFontColor,
+      mealFontColor,
       highlightColor,
+      cardBgColor,
       customBgColor,
       customBgImage,
-      disableBackground,
+      showOnlyToday,
       disableAnimations,
-      showCurrentMonth,
-      hideDates,
       language,
       appLabels
     });
@@ -81,8 +81,7 @@ const CafeTeriaForm = ({ card }) => {
           <img src={card.imageSrc} alt={card.title} style={styles.image} />
         )}
         <p>
-          This app will show a list of birthday events matching the filtering
-          criteria.
+          This app will show a list of cafeteria meals for each day of the week.
         </p>
         <p>Better Viewed Like This:</p>
         <div style={styles.previewBoxes}>
@@ -166,22 +165,28 @@ const CafeTeriaForm = ({ card }) => {
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
                   style={styles.input}
+                  placeholder="Seconds"
                 />
               </div>
 
               <div style={styles.field}>
-                <label>No Meal Message:</label>
+                <label>No Meal Message (optional):</label>
                 <input
                   type="text"
                   value={noMealMessage}
                   onChange={(e) => setNoMealMessage(e.target.value)}
                   style={styles.input}
+                  placeholder="Message when no meals available"
                 />
               </div>
 
               <div style={styles.field}>
-                <label>Text Font:</label>
-                <select style={styles.input}>
+                <label>Text Font (optional):</label>
+                <select 
+                  value={textFont}
+                  onChange={(e) => setTextFont(e.target.value)}
+                  style={styles.input}
+                >
                   <option value="Arial">Arial</option>
                   <option value="Courier New">Courier New</option>
                   <option value="Georgia">Georgia</option>
@@ -191,11 +196,11 @@ const CafeTeriaForm = ({ card }) => {
               </div>
 
               <div style={styles.field}>
-                <label>Item Font Color:</label>
+                <label>Items Font Color (optional):</label>
                 <input
                   type="color"
-                  value={titleFontColor}
-                  onChange={(e) => setTitleFontColor(e.target.value)}
+                  value={itemsFontColor}
+                  onChange={(e) => setItemsFontColor(e.target.value)}
                 />
               </div>
 
@@ -203,8 +208,8 @@ const CafeTeriaForm = ({ card }) => {
                 <label>Meal Font Color (optional):</label>
                 <input
                   type="color"
-                  value={cardFontColor}
-                  onChange={(e) => setCardFontColor(e.target.value)}
+                  value={mealFontColor}
+                  onChange={(e) => setMealFontColor(e.target.value)}
                 />
               </div>
 
@@ -213,7 +218,16 @@ const CafeTeriaForm = ({ card }) => {
                 <input
                   type="color"
                   value={highlightColor}
-                  onChange={(e) => setHighlightColour(e.target.value)}
+                  onChange={(e) => setHighlightColor(e.target.value)}
+                />
+              </div>
+
+              <div style={styles.field}>
+                <label>Card's Background Color (optional):</label>
+                <input
+                  type="color"
+                  value={cardBgColor}
+                  onChange={(e) => setCardBgColor(e.target.value)}
                 />
               </div>
 
@@ -230,6 +244,7 @@ const CafeTeriaForm = ({ card }) => {
                 <label>Background Image (optional):</label>
                 <input
                   type="file"
+                  accept="image/*"
                   onChange={(e) => setCustomBgImage(e.target.files[0])}
                 />
               </div>
@@ -238,16 +253,16 @@ const CafeTeriaForm = ({ card }) => {
                 <label>
                   <input
                     type="checkbox"
-                    checked={showCurrentMonth}
-                    onChange={(e) => setShowCurrentMonth(e.target.checked)}
+                    checked={showOnlyToday}
+                    onChange={(e) => setShowOnlyToday(e.target.checked)}
                   />{" "}
                   Show Only Today
                 </label>
                 <label>
                   <input
                     type="checkbox"
-                    checked={hideDates}
-                    onChange={(e) => setHideDates(e.target.checked)}
+                    checked={disableAnimations}
+                    onChange={(e) => setDisableAnimations(e.target.checked)}
                   />{" "}
                   Disable Animation
                 </label>
@@ -417,6 +432,12 @@ const CafeTeriaForm = ({ card }) => {
             image={customBgImage ? URL.createObjectURL(customBgImage) : card.imageSrc}
             duration={duration ? parseInt(duration) : 5}
             onClose={() => setShowPopup(false)}
+            itemsFontColor={itemsFontColor}
+            mealFontColor={mealFontColor}
+            highlightColor={highlightColor}
+            cardBgColor={cardBgColor}
+            customBgColor={customBgColor}
+            textFont={textFont}
           />
         )}
       </div>

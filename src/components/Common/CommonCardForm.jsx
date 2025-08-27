@@ -24,6 +24,7 @@ import YouTubeForm from "../Widgets/SocialNetwork/YouTube/YouTubeForm";
 import FacebookPageForm from "../Widgets/SocialNetwork/FacebookPage/FacebookPageForm";
 import AnimatedFacebookAppMain from "../Widgets/SocialNetwork/AnimatedFacebookApp/AnimatedFacebookAppMain";
 import QRCodeForm from "../Widgets/TextAndScroller/QRCode/QRCodeForm";
+import DirectoryForm from "../Widgets/MenuBoard/Directory_List/DirectoryListForm";
 // import TextTickerForm from "../Widgets/TextAndScroller/TextTicker/TextTickerForm";
 // import RichTextWidgetForm from "../Widgets/TextAndScroller/RichTextWidget/RichTextWidgetForm";
 
@@ -205,8 +206,8 @@ const renderDynamicContent = () => {
       switch (card.cardType) {
         case "cafeteria":
           return <CafeTeriaForm card={card} />;
-        // case "directory_list":
-        //   return <CafeTeriaForm card={card} />;
+        case "directory_list":
+          return <DirectoryForm card={card} />;
         case "menu_board_basic":
           return <CafeTeriaForm card={card} />;
         case "menu_board_casual":
