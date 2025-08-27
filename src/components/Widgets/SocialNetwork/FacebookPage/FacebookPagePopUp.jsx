@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 
-function AnimatedFacebookAppPopUp({ 
+function FacebookPagePopUp({ 
     onClose, 
     appName, 
     tags, 
     facebookPageUrl, 
     numberOfPosts, 
     postDuration, 
-    textSize,
-    textFont,
-    kenBurnsEffect,
-    transitionAnimation,
+    headerColor, 
+    highlightColor, 
+    fontColor, 
+    textFont, 
     backgroundColor, 
     backgroundImage, 
-    textColor,
-    headerColor,
-    highlightColor
+    enableAnimations 
 }) {
     const [currentPostIndex, setCurrentPostIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [animationDirection, setAnimationDirection] = useState('next');
+    const [apiError, setApiError] = useState(null);
 
     // Extract page ID from Facebook URL
     const getPageIdFromUrl = (url) => {
@@ -31,9 +29,10 @@ function AnimatedFacebookAppPopUp({
             const urlObj = new URL(url);
             const pathname = urlObj.pathname;
             
+            // Extract page ID from different Facebook URL formats
             if (pathname.includes('/pages/')) {
                 const parts = pathname.split('/pages/')[1].split('/');
-                return parts[1] || parts[0];
+                return parts[1] || parts[0]; // Sometimes ID is after page name
             } else if (pathname.startsWith('/')) {
                 const pageId = pathname.substring(1).split('/')[0];
                 return pageId;
@@ -53,6 +52,7 @@ function AnimatedFacebookAppPopUp({
             const urlObj = new URL(url);
             const pathname = urlObj.pathname;
             
+            // Extract page name from different Facebook URL formats
             if (pathname.includes('/pages/')) {
                 const parts = pathname.split('/pages/')[1].split('/');
                 return parts[0].replace(/-/g, ' ');
@@ -72,11 +72,14 @@ function AnimatedFacebookAppPopUp({
         if (!pageId) return [];
         
         setLoading(true);
+        setApiError(null);
         
         try {
+            // Facebook Graph API endpoint with timeout
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
             
+            // Using a demo access token - replace with your own from developers.facebook.com
             const accessToken = 'demo_token_replace_with_real_one';
             const fields = 'id,message,created_time,full_picture,attachments,likes.summary(true),comments.summary(true),shares,from,story';
             const limit = parseInt(numberOfPosts) || 10;
@@ -118,40 +121,49 @@ function AnimatedFacebookAppPopUp({
                 return formattedPosts;
             }
             
+            // No posts found
             throw new Error('No posts found for this page');
             
         } catch (error) {
             console.error('Facebook API Error:', error);
             
-            // Return demo posts for preview
-            return generateDemoPosts(pageName, pageId);
+            if (error.name === 'AbortError') {
+                setApiError('Request timeout - please try again');
+            } else if (error.message.includes('Invalid OAuth')) {
+                setApiError('Invalid access token - please configure Facebook API');
+            } else {
+                setApiError(`Failed to load posts: ${error.message}`);
+            }
+            
+            // Return demo posts for testing
+            return [
+                {
+                    id: 'demo_1',
+                    author: pageName || 'Demo Page',
+                    username: `@${pageId}`,
+                    time: '2 HOURS AGO',
+                    content: `Demo post from ${pageName || 'Facebook Page'}. Configure Facebook API access token to see real posts.`,
+                    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=300&fit=crop',
+                    likes: 123,
+                    comments: 45,
+                    shares: 12
+                },
+                {
+                    id: 'demo_2',
+                    author: pageName || 'Demo Page',
+                    username: `@${pageId}`,
+                    time: '1 DAY AGO',
+                    content: `Another demo post. Replace 'demo_token_replace_with_real_one' with actual Facebook access token.`,
+                    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=300&fit=crop',
+                    likes: 89,
+                    comments: 23,
+                    shares: 7
+                }
+            ];
             
         } finally {
             setLoading(false);
         }
-    };
-
-    // Generate demo posts for preview
-    const generateDemoPosts = (pageName, pageId) => {
-        const demoImages = [
-            'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop'
-        ];
-
-        return Array.from({ length: parseInt(numberOfPosts) || 5 }, (_, index) => ({
-            id: `demo_${index + 1}`,
-            author: pageName || 'Demo Page',
-            username: `@${pageId || 'demopage'}`,
-            time: `${index + 1} HOURS AGO`,
-            content: `This is a demo post ${index + 1} from ${pageName || 'Facebook Page'}. The animated Facebook widget supports Ken Burns effect on images and smooth transition animations between posts. Configure your Facebook API access token to see real posts.`,
-            image: demoImages[index % demoImages.length],
-            likes: Math.floor(Math.random() * 500) + 50,
-            comments: Math.floor(Math.random() * 100) + 10,
-            shares: Math.floor(Math.random() * 50) + 5
-        }));
     };
 
     // Format timestamp to readable format
@@ -173,12 +185,17 @@ function AnimatedFacebookAppPopUp({
     useEffect(() => {
         const loadPosts = async () => {
             if (facebookPageUrl && pageId) {
+                // Try to fetch real posts first
                 const realPosts = await fetchFacebookPosts(pageId);
-                setPosts(realPosts);
+                if (realPosts && realPosts.length > 0) {
+                    setPosts(realPosts);
+                } else {
+                    // No posts available
+                    setPosts([]);
+                }
             } else {
-                // Generate demo posts for preview
-                const demoPosts = generateDemoPosts("Demo Facebook Page", "demopage");
-                setPosts(demoPosts);
+                // No URL provided, no posts available
+                setPosts([]);
             }
         };
 
@@ -188,16 +205,12 @@ function AnimatedFacebookAppPopUp({
     const postsToShow = posts.slice(0, parseInt(numberOfPosts) || 3);
 
     const changePost = () => {
-        if (transitionAnimation && postsToShow.length > 1) {
+        if (enableAnimations && postsToShow.length > 1) {
             setIsAnimating(true);
             setTimeout(() => {
-                setCurrentPostIndex((prev) => {
-                    const nextIndex = (prev + 1) % postsToShow.length;
-                    setAnimationDirection(nextIndex > prev ? 'next' : 'prev');
-                    return nextIndex;
-                });
+                setCurrentPostIndex((prev) => (prev + 1) % postsToShow.length);
                 setIsAnimating(false);
-            }, 500);
+            }, 300);
         } else {
             setCurrentPostIndex((prev) => (prev + 1) % postsToShow.length);
         }
@@ -209,31 +222,12 @@ function AnimatedFacebookAppPopUp({
 
         const interval = setInterval(() => {
             changePost();
-        }, (parseInt(postDuration) || 15) * 1000);
+        }, enableAnimations ? 2000 : (parseInt(postDuration) || 15) * 1000);
 
         return () => clearInterval(interval);
-    }, [postDuration, postsToShow.length, transitionAnimation]);
+    }, [enableAnimations, postDuration, postsToShow.length]);
 
     const currentPost = postsToShow[currentPostIndex] || postsToShow[0];
-
-    const getPostTransform = () => {
-        if (!transitionAnimation) return 'translateX(0)';
-        
-        if (isAnimating) {
-            return animationDirection === 'next' ? 'translateX(-100%) scale(0.95)' : 'translateX(100%) scale(0.95)';
-        }
-        return 'translateX(0) scale(1)';
-    };
-
-    const getPostOpacity = () => {
-        if (!transitionAnimation) return 1;
-        return isAnimating ? 0.3 : 1;
-    };
-
-    const getPostTransition = () => {
-        if (!transitionAnimation) return 'none';
-        return 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-    };
 
     // Don't render if no posts available
     if (!currentPost || postsToShow.length === 0) {
@@ -258,7 +252,7 @@ function AnimatedFacebookAppPopUp({
                 {/* Facebook Container */}
                 <div style={{
                     ...styles.facebookContainer,
-                    backgroundColor: backgroundColor || "#ffffff",
+                    backgroundColor: backgroundColor,
                     backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
                     backgroundSize: backgroundImage ? 'cover' : 'auto',
                     backgroundPosition: backgroundImage ? 'center' : 'initial',
@@ -274,7 +268,7 @@ function AnimatedFacebookAppPopUp({
                             <span style={styles.fbText}>Facebook</span>
                         </div>
                         <div style={styles.headerRight}>
-                            <span style={styles.appName}>{appName || "Animated Facebook Widget"}</span>
+                            <span style={styles.appName}>{appName || "Facebook Widget"}</span>
                         </div>
                     </div>
 
@@ -282,16 +276,13 @@ function AnimatedFacebookAppPopUp({
                     <div style={styles.postContainer}>
                         <div style={{
                             ...styles.postWrapper,
-                            overflow: transitionAnimation ? 'hidden' : 'visible'
+                            overflow: enableAnimations ? 'hidden' : 'visible'
                         }}>
                             <div style={{
                                 ...styles.post,
-                                color: textColor || "#333",
-                                fontSize: textSize || "16px",
-                                fontFamily: textFont || "Arial, sans-serif",
-                                transform: getPostTransform(),
-                                opacity: getPostOpacity(),
-                                transition: getPostTransition()
+                                color: fontColor || "#333",
+                                transform: enableAnimations && isAnimating ? 'translateX(-100%)' : 'translateX(0)',
+                                transition: enableAnimations ? 'transform 0.3s ease-in-out' : 'none'
                             }}>
                                 {/* Post Header */}
                                 <div style={styles.postHeader}>
@@ -318,24 +309,18 @@ function AnimatedFacebookAppPopUp({
 
                                 {/* Post Content */}
                                 {currentPost.content && (
-                                    <div style={{
-                                        ...styles.postContent,
-                                        fontSize: textSize || "16px"
-                                    }}>
+                                    <div style={styles.postContent}>
                                         {currentPost.content}
                                     </div>
                                 )}
 
-                                {/* Post Image with Ken Burns Effect */}
+                                {/* Post Image */}
                                 {currentPost.image && (
                                     <div style={styles.postImageContainer}>
                                         <img 
                                             src={currentPost.image} 
                                             alt="Post content" 
-                                            style={{
-                                                ...styles.postImage,
-                                                animation: kenBurnsEffect ? 'kenBurns 20s ease-in-out infinite alternate' : 'none'
-                                            }}
+                                            style={styles.postImage}
                                             onError={(e) => {
                                                 e.target.style.display = 'none';
                                             }}
@@ -345,24 +330,15 @@ function AnimatedFacebookAppPopUp({
 
                                 {/* Post Stats */}
                                 <div style={styles.postStats}>
-                                    <div style={{
-                                        ...styles.statItem,
-                                        fontSize: textSize ? `${parseInt(textSize) - 2}px` : "14px"
-                                    }}>
+                                    <div style={styles.statItem}>
                                         <span style={styles.statIcon}>👍</span>
                                         <span>{currentPost.likes || 0}</span>
                                     </div>
-                                    <div style={{
-                                        ...styles.statItem,
-                                        fontSize: textSize ? `${parseInt(textSize) - 2}px` : "14px"
-                                    }}>
+                                    <div style={styles.statItem}>
                                         <span style={styles.statIcon}>💬</span>
                                         <span>{currentPost.comments || 0}</span>
                                     </div>
-                                    <div style={{
-                                        ...styles.statItem,
-                                        fontSize: textSize ? `${parseInt(textSize) - 2}px` : "14px"
-                                    }}>
+                                    <div style={styles.statItem}>
                                         <span style={styles.statIcon}>🔄</span>
                                         <span>{currentPost.shares || 0}</span>
                                     </div>
@@ -382,13 +358,12 @@ function AnimatedFacebookAppPopUp({
                                         backgroundColor: index === currentPostIndex ? (highlightColor || "#1877f2") : '#ccc'
                                     }}
                                     onClick={() => {
-                                        if (transitionAnimation) {
-                                            setAnimationDirection(index > currentPostIndex ? 'next' : 'prev');
+                                        if (enableAnimations) {
                                             setIsAnimating(true);
                                             setTimeout(() => {
                                                 setCurrentPostIndex(index);
                                                 setIsAnimating(false);
-                                            }, 500);
+                                            }, 300);
                                         } else {
                                             setCurrentPostIndex(index);
                                         }
@@ -400,22 +375,11 @@ function AnimatedFacebookAppPopUp({
 
                     {/* App Info */}
                     <div style={styles.appInfo}>
-                        <div style={{
-                            ...styles.appName,
-                            fontSize: textSize ? `${parseInt(textSize) + 2}px` : "16px",
-                            color: textColor || "#333"
-                        }}>
-                            {appName}
-                        </div>
+                        <div style={styles.appName}>{appName}</div>
                         {tags && tags.length > 0 && (
                             <div style={styles.tagsContainer}>
                                 {tags.map((tag, index) => (
-                                    <span key={index} style={{
-                                        ...styles.tag,
-                                        fontSize: textSize ? `${parseInt(textSize) - 4}px` : "12px"
-                                    }}>
-                                        {tag}
-                                    </span>
+                                    <span key={index} style={styles.tag}>{tag}</span>
                                 ))}
                             </div>
                         )}
@@ -571,19 +535,16 @@ const styles = {
         fontSize: "16px",
         lineHeight: "1.5",
         marginBottom: "15px",
-        wordWrap: "break-word",
     },
     postImageContainer: {
         marginBottom: "15px",
         borderRadius: "8px",
         overflow: "hidden",
-        position: "relative",
     },
     postImage: {
         width: "100%",
         height: "auto",
         display: "block",
-        transformOrigin: "center center",
     },
     postStats: {
         display: "flex",
@@ -638,11 +599,10 @@ const styles = {
         fontSize: "12px",
         color: "#666",
     },
-    loadingContainer: {
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+    statusContainer: {
+        padding: "15px 20px",
+        backgroundColor: "rgba(0, 0, 0, 0.05)",
+        borderTop: "1px solid #e4e6ea",
     },
     loadingText: {
         fontSize: "16px",
@@ -652,40 +612,36 @@ const styles = {
         justifyContent: "center",
         gap: "8px",
     },
+    errorText: {
+        fontSize: "16px",
+        color: "#f44336",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px",
+    },
+    fallbackText: {
+        fontSize: "14px",
+        color: "#65676b",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px",
+    },
+    successText: {
+        fontSize: "16px",
+        color: "#4caf50",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px",
+    },
+    loadingContainer: {
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 };
 
-// Add Ken Burns effect keyframes to the document head
-const addKenBurnsKeyframes = () => {
-    const styleId = 'ken-burns-keyframes';
-    if (!document.getElementById(styleId)) {
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
-            @keyframes kenBurns {
-                0% {
-                    transform: scale(1) translate(0, 0);
-                }
-                25% {
-                    transform: scale(1.1) translate(-2%, -1%);
-                }
-                50% {
-                    transform: scale(1.05) translate(1%, -2%);
-                }
-                75% {
-                    transform: scale(1.08) translate(-1%, 1%);
-                }
-                100% {
-                    transform: scale(1.03) translate(1%, -1%);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-};
-
-// Initialize Ken Burns keyframes when component loads
-if (typeof window !== 'undefined') {
-    addKenBurnsKeyframes();
-}
-
-export default AnimatedFacebookAppPopUp;
+export default FacebookPagePopUp;

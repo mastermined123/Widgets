@@ -20,12 +20,15 @@ import AnalogSquareClockForm from "../Widgets/Clock/AnalogSquareClock/AnalogSqua
 import DigitalClockSimpleForm from "../Widgets/Clock/DigitalClockSimple/DigitalClockSimpleForm";
 //import ModernWeatherForecastForm from "../Widgets/Weather/ModernWeatherForecast/ModernWeatherForecastForm";
 import ModernWeatherForecastTallandBarMain from "../Widgets/Weather/ModernWeatherForecastTallandBar/ModernWeatherForecastTallandBarMain";
+import YouTubeForm from "../Widgets/SocialNetwork/YouTube/YouTubeForm";
+import FacebookPageForm from "../Widgets/SocialNetwork/FacebookPage/FacebookPageForm";
+import AnimatedFacebookAppMain from "../Widgets/SocialNetwork/AnimatedFacebookApp/AnimatedFacebookAppMain";
+import QRCodeForm from "../Widgets/TextAndScroller/QRCode/QRCodeForm";
+// import TextTickerForm from "../Widgets/TextAndScroller/TextTicker/TextTickerForm";
+// import RichTextWidgetForm from "../Widgets/TextAndScroller/RichTextWidget/RichTextWidgetForm";
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
   if (!card) return null;
-
-
-
 
   const category = categories.find(cat =>
     cat.cards?.some(c => c.id === card.id)
@@ -49,7 +52,6 @@ const renderDynamicContent = () => {
            <AmericanFootball card={card} />
           );
       }
-
 
     case "clock":
       switch (card.cardType) {
@@ -135,6 +137,20 @@ const renderDynamicContent = () => {
                   );
           }
 
+      case "social_network":
+        switch (card.cardType) {
+          case "youtube_video":
+            return <YouTubeForm card={card} />;
+          case "facebook_page":
+            return <FacebookPageForm card={card} />;
+          case "animated_facebook_app":
+            return <AnimatedFacebookAppMain card={card} />;
+          default:
+            return (
+              <AmericanFootball card={card} />
+            );
+        }
+
     case "other":
       switch (card.cardType) {
         case "audio_announcement_app":
@@ -204,6 +220,20 @@ const renderDynamicContent = () => {
       }
 
 
+
+    // case "text_and_scrollers":
+    //   switch (card.cardType) {
+    //     // case "qr_code":
+    //     //   return <QRCodeForm card={card} />;
+    //     // case "text_ticker":
+    //     //   return <TextTickerForm card={card} />;
+    //     // case "rich_text_widget":
+    //     //   return <RichTextWidgetForm card={card} />;
+    //     default:
+    //       return (
+    //         <AmericanFootball card={card} />
+    //       );
+    //   }
 
       
    
