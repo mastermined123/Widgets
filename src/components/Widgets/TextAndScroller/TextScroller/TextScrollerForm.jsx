@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import QRCodePopUp from "./QRCodePopUp";
+import TextScrollerPopUp from "./TextScrollerPopUp";
 
-function QRCodeForm({ card }) {
+function TextScrollerForm({ card }) {
     const [activeTab, setActiveTab] = useState("settings");
 
     // Fields
     const [appName, setAppName] = useState("");
     const [tags, setTags] = useState([]);
     const [dataFeed, setDataFeed] = useState(""); // input for tags
-    const [textToEncode, setTextToEncode] = useState("");
-    const [qrCodeColor, setQrCodeColor] = useState("#000000");
-    const [backgroundColor, setBackgroundColor] = useState("#ffffff");
-    const [backgroundImage, setBackgroundImage] = useState("");
-    const [transparentBackground, setTransparentBackground] = useState(false);
+    const [textColor, setTextColor] = useState("#ffffff");
+    const [backgroundColor, setBackgroundColor] = useState("#007184");
+    const [scrollSpeed, setScrollSpeed] = useState("Default");
+    const [customScrollSpeed, setCustomScrollSpeed] = useState("");
+    const [fontSize, setFontSize] = useState("");
+    const [textFont, setTextFont] = useState("");
+    const [text, setText] = useState("");
 
     const [showPopup, setShowPopup] = useState(false);
     const [appNameError, setAppNameError] = useState("");
@@ -40,8 +42,8 @@ function QRCodeForm({ card }) {
             setAppNameError("");
         }
 
-        if (!textToEncode.trim()) {
-            setTextError("Please enter text to encode.");
+        if (!text.trim()) {
+            setTextError("Please enter text to scroll.");
             hasError = true;
         } else {
             setTextError("");
@@ -56,33 +58,24 @@ function QRCodeForm({ card }) {
         console.log({
             appName,
             tags,
-            textToEncode,
-            qrCodeColor,
+            textColor,
             backgroundColor,
-            backgroundImage,
-            transparentBackground,
+            scrollSpeed,
+            customScrollSpeed,
+            fontSize,
+            textFont,
+            text,
         });
         alert("Saved! Check console.");
-    };
-
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setBackgroundImage(e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
     };
 
     return (
         <div style={styles.container}>
             {/* Left Portion */}
             <div style={styles.left}>
-                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "QR Code Generator"}</label>
-                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "QR Code Generator"} style={styles.image} />}
-                <p>Generate customizable QR codes with colors, background options, and text encoding.</p>
+                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Text Scroller"}</label>
+                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Text Scroller"} style={styles.image} />}
+                <p>Create scrolling text displays with customizable colors, fonts, and scroll speeds.</p>
             </div>
 
             {/* Right Portion */}
@@ -142,97 +135,134 @@ function QRCodeForm({ card }) {
                                 </div>
                             </div>
 
-                            {/* Text to be encoded to QRCode */}
+                            {/* Text color */}
                             <div style={styles.field}>
-                                <label>Text to be encoded to QRCode</label>
+                                <label>Text color</label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={textColor}
+                                        onChange={(e) => setTextColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#ffffff" />
+                                    <input
+                                        type="color"
+                                        value={textColor}
+                                        onChange={(e) => setTextColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                            </div>
+
+                            {/* Background color */}
+                            <div style={styles.field}>
+                                <label>Background color</label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={backgroundColor}
+                                        onChange={(e) => setBackgroundColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#007184" />
+                                    <input
+                                        type="color"
+                                        value={backgroundColor}
+                                        onChange={(e) => setBackgroundColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                            </div>
+
+                            {/* Scroll speed */}
+                            <div style={styles.field}>
+                                <label>Scroll speed</label>
+                                <select
+                                    value={scrollSpeed}
+                                    onChange={(e) => setScrollSpeed(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="Default">Default</option>
+                                    <option value="Slow">Slow</option>
+                                    <option value="Fast">Fast</option>
+                                </select>
+                            </div>
+
+                            {/* Custom scrolling speed */}
+                            <div style={styles.field}>
+                                <label>Custom scrolling speed (20-1000) <span style={styles.optional}>(optional)</span></label>
+                                <input
+                                    type="number"
+                                    value={customScrollSpeed}
+                                    onChange={(e) => setCustomScrollSpeed(e.target.value)}
+                                    placeholder="300"
+                                    min="20"
+                                    max="1000"
+                                    style={styles.input}
+                                />
+                                <small style={styles.helpText}>
+                                    Overwrites the scroll speed, if set. A lower number will result in a lower scrolling speed. As an example, our default speed is 300.
+                                </small>
+                            </div>
+
+                            {/* Font size */}
+                            <div style={styles.field}>
+                                <label>Font size (%) <span style={styles.optional}>(optional)</span></label>
+                                <input
+                                    type="number"
+                                    value={fontSize}
+                                    onChange={(e) => setFontSize(e.target.value)}
+                                    placeholder="100"
+                                    style={styles.input}
+                                />
+                                <small style={styles.helpText}>
+                                    Increase or decrease the font size by the desired percentage. Numbers only.
+                                </small>
+                            </div>
+
+                            {/* Text font */}
+                            <div style={styles.field}>
+                                <label>Text font <span style={styles.optional}>(optional)</span></label>
+                                <select
+                                    value={textFont}
+                                    onChange={(e) => setTextFont(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="">Click here to select a font</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Helvetica">Helvetica</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Courier New">Courier New</option>
+                                </select>
+                                <small style={styles.helpText}>
+                                    Change the font used to show the text.
+                                </small>
+                            </div>
+
+                            {/* Text */}
+                            <div style={styles.field}>
+                                <label>Text</label>
                                 <textarea
-                                    value={textToEncode}
+                                    value={text}
                                     onChange={(e) => {
-                                        setTextToEncode(e.target.value);
+                                        setText(e.target.value);
                                         if (textError) setTextError("");
                                     }}
-                                    placeholder="Enter text to encode in QR code"
+                                    placeholder="Enter text to scroll"
                                     style={{
                                         ...styles.textarea,
                                         borderColor: textError ? "#ff0000" : "#ccc"
                                     }}
-                                    rows={4}
+                                    rows={6}
                                 />
+                                <small style={styles.helpText}>
+                                    One line per message
+                                </small>
                                 {textError && (
                                     <div style={styles.errorMessage}>
                                         <span style={styles.errorIcon}>⚠</span>
                                         {textError}
                                     </div>
                                 )}
-                            </div>
-
-                            {/* QRCode color (optional) */}
-                            <div style={styles.field}>
-                                <label>QRCode color <span style={styles.optional}>(optional)</span></label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={qrCodeColor}
-                                        onChange={(e) => setQrCodeColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#000000" />
-                                    <input
-                                        type="color"
-                                        value={qrCodeColor}
-                                        onChange={(e) => setQrCodeColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                            </div>
-
-                            {/* Background color (optional) */}
-                            <div style={styles.field}>
-                                <label>Background color <span style={styles.optional}>(optional)</span></label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={backgroundColor}
-                                        onChange={(e) => setBackgroundColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#ffffff" />
-                                    <input
-                                        type="color"
-                                        value={backgroundColor}
-                                        onChange={(e) => setBackgroundColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                            </div>
-
-                            {/* Background image (optional) */}
-                            {/* <div style={styles.field}>
-                                <label>Background image <span style={styles.optional}>(optional)</span></label>
-                                <div style={styles.fileInputContainer}>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleImageUpload}
-                                        style={styles.hiddenInput}
-                                        id="backgroundImage"
-                                    />
-                                    <label htmlFor="backgroundImage" style={styles.chooseButton}>
-                                        Choose
-                                    </label>
-                                    {backgroundImage && (
-                                        <span style={styles.fileName}>Image selected</span>
-                                    )}
-                                </div>
-                            </div> */}
-
-                            {/* Transparent Background */}
-                            <div style={styles.field}>
-                                <label style={styles.checkboxContainer}>
-                                    <input
-                                        type="checkbox"
-                                        checked={transparentBackground}
-                                        onChange={(e) => setTransparentBackground(e.target.checked)}
-                                        style={styles.checkbox}
-                                    />
-                                    Transparent Background
-                                </label>
                             </div>
                         </div>
                     )}
@@ -246,15 +276,17 @@ function QRCodeForm({ card }) {
 
                 {/* Preview Popup */}
                 {showPopup && (
-                    <QRCodePopUp
+                    <TextScrollerPopUp
                         onClose={() => setShowPopup(false)}
                         appName={appName}
                         tags={tags}
-                        textToEncode={textToEncode}
-                        qrCodeColor={qrCodeColor}
+                        textColor={textColor}
                         backgroundColor={backgroundColor}
-                        backgroundImage={backgroundImage}
-                        transparentBackground={transparentBackground}
+                        scrollSpeed={scrollSpeed}
+                        customScrollSpeed={customScrollSpeed}
+                        fontSize={fontSize}
+                        textFont={textFont}
+                        text={text}
                     />
                 )}
             </div>
@@ -331,6 +363,11 @@ const styles = {
         color: "#666",
         fontSize: "12px",
         fontWeight: "normal"
+    },
+    helpText: {
+        color: "#666",
+        fontSize: "12px",
+        marginTop: "4px"
     },
     bottomButtons: {
         display: "flex",
@@ -418,38 +455,6 @@ const styles = {
         cursor: "pointer",
         padding: "0",
     },
-    fileInputContainer: {
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-    },
-    hiddenInput: {
-        display: "none",
-    },
-    chooseButton: {
-        padding: "8px 16px",
-        backgroundColor: "#007acc",
-        color: "#fff",
-        border: "none",
-        borderRadius: "4px",
-        cursor: "pointer",
-        fontSize: "14px",
-    },
-    fileName: {
-        fontSize: "14px",
-        color: "#666",
-    },
-    checkboxContainer: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        cursor: "pointer",
-    },
-    checkbox: {
-        width: "16px",
-        height: "16px",
-        cursor: "pointer",
-    },
 };
 
-export default QRCodeForm;
+export default TextScrollerForm;
