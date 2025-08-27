@@ -27,6 +27,7 @@ import QRCodeForm from "../Widgets/TextAndScroller/QRCode/QRCodeForm";
 import DirectoryForm from "../Widgets/MenuBoard/Directory_List/DirectoryListForm";
 // import TextTickerForm from "../Widgets/TextAndScroller/TextTicker/TextTickerForm";
 // import RichTextWidgetForm from "../Widgets/TextAndScroller/RichTextWidget/RichTextWidgetForm";
+import TextScrollerForm from "../Widgets/TextAndScroller/TextScroller/TextScrollerForm";
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
   if (!card) return null;
@@ -222,21 +223,20 @@ const renderDynamicContent = () => {
 
 
 
-    // case "text_and_scrollers":
-    //   switch (card.cardType) {
-    //     // case "qr_code":
-    //     //   return <QRCodeForm card={card} />;
-    //     // case "text_ticker":
-    //     //   return <TextTickerForm card={card} />;
+
+     case "text_and_scrollers":
+      switch (card.cardType) {
+        case "qr_code":
+          return <QRCodeForm card={card} />;
+              case "text_scroller":
+              return <TextScrollerForm card={card} />;
     //     // case "rich_text_widget":
     //     //   return <RichTextWidgetForm card={card} />;
-    //     default:
-    //       return (
-    //         <AmericanFootball card={card} />
-    //       );
-    //   }
-
-      
+        default:
+          return (
+            <AmericanFootball card={card} />
+          );
+      }      
    
       default:
       return (

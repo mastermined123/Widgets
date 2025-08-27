@@ -27,14 +27,14 @@ const QRCodePopUp = ({
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
       
-      // Set canvas size
-      canvas.width = 300;
-      canvas.height = 300;
+      // Set canvas size - larger preview area
+      canvas.width = 800;
+      canvas.height = 600;
 
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Set background if not transparent
+      // Set background for entire canvas if not transparent
       if (!transparentBackground) {
         if (backgroundImage) {
           // Load and draw background image
@@ -46,7 +46,7 @@ const QRCodePopUp = ({
           bgImg.src = backgroundImage;
           return;
         } else {
-          // Solid background color
+          // Solid background color for entire canvas
           ctx.fillStyle = backgroundColor;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
@@ -60,18 +60,25 @@ const QRCodePopUp = ({
     const qrImg = new Image();
     qrImg.crossOrigin = "anonymous";
     qrImg.onload = () => {
-      ctx.drawImage(qrImg, 0, 0, 300, 300);
+      // Center the QR code (300x300) in the larger canvas (800x600)
+      const qrSize = 300;
+      const xOffset = (800 - qrSize) / 2;
+      const yOffset = (600 - qrSize) / 2;
+      ctx.drawImage(qrImg, xOffset, yOffset, qrSize, qrSize);
     };
     qrImg.onerror = () => {
-      // Fallback: Draw a placeholder
+      // Fallback: Draw a centered placeholder
+      const qrSize = 300;
+      const xOffset = (800 - qrSize) / 2;
+      const yOffset = (600 - qrSize) / 2;
       ctx.fillStyle = '#f0f0f0';
-      ctx.fillRect(50, 50, 200, 200);
+      ctx.fillRect(xOffset + 50, yOffset + 50, 200, 200);
       ctx.fillStyle = '#333';
       ctx.font = '16px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('QR Code Preview', 150, 140);
-      ctx.fillText('(Install qrcode package', 150, 160);
-      ctx.fillText('for full functionality)', 150, 180);
+      ctx.fillText('QR Code Preview', 400, 300);
+      ctx.fillText('(Install qrcode package', 400, 320);
+      ctx.fillText('for full functionality)', 400, 340);
     };
     qrImg.src = qrUrl;
   };
@@ -86,37 +93,12 @@ const QRCodePopUp = ({
 
         {/* Content */}
         <div style={styles.content}>
-          <h2 style={styles.title}>{appName}</h2>
-          
           {/* QR Code Canvas */}
           <div style={styles.qrContainer}>
             <canvas 
               ref={canvasRef}
               style={styles.qrCanvas}
             />
-          </div>
-
-          {/* Text being encoded */}
-          <div style={styles.textInfo}>
-            <strong>Encoded Text:</strong>
-            <div style={styles.encodedText}>{textToEncode}</div>
-          </div>
-
-          {/* Tags (below QR code) */}
-          {tags?.length > 0 && (
-            <div style={styles.tagsContainer}>
-              <strong>Tags:</strong>
-              <div style={styles.tagsWrapper}>
-                {tags.map((tag, i) => (
-                  <span key={i} style={styles.tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Instructions */}
-          <div style={styles.instructions}>
-            <p>Scan this QR code with your device to view the encoded text.</p>
           </div>
         </div>
       </div>
@@ -138,23 +120,22 @@ const styles = {
     zIndex: 2000,
   },
   popup: {
-    backgroundColor: "#ffffff",
-    borderRadius: "8px",
-    boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
+    backgroundColor: "transparent",
+    borderRadius: "0px",
+    boxShadow: "none",
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
-    width: "500px",
-    maxHeight: "80vh",
-    padding: "30px",
+    width: "800px",
+    padding: "0px",
     position: "relative",
   },
   closeBtn: {
     position: "absolute",
-    top: "15px",
-    right: "15px",
+    top: "10px",
+    right: "10px",
     border: "none",
-    background: "rgba(0,0,0,0.1)",
+    background: "rgba(255,255,255,0.8)",
     fontSize: "18px",
     cursor: "pointer",
     width: "30px",
@@ -164,13 +145,15 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     zIndex: 10,
+    color: "#000",
   },
   content: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "20px",
+    gap: "0px",
+    backgroundColor: "transparent",
   },
   title: {
     margin: 0,
@@ -183,15 +166,14 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "20px",
-    border: "2px solid #eee",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9",
+    padding: "0px",
+    backgroundColor: "transparent",
   },
   qrCanvas: {
     maxWidth: "100%",
     height: "auto",
-    borderRadius: "4px",
+    borderRadius: "0px",
+    display: "block",
   },
   textInfo: {
     width: "100%",
