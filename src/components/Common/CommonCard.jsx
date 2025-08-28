@@ -29,7 +29,10 @@ const CommonCard = ({
 
 
       {imageSrc && (
+                <div style={styles.imageContainer}>
+
         <img src={imageSrc} alt={title} style={styles.image} />
+        </div>
       )}
     </div>
   );
@@ -51,7 +54,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "5px 10px",
+    padding: "5px 5px",
     borderBottom: "1px solid #eee",
     backgroundColor: "#f5f5f5",
   },
@@ -61,7 +64,7 @@ const styles = {
   },
   icons: {
     display: "flex",
-    gap: "9px"
+    gap: "7px"
   },
   icon: {
     fontSize: "10px",
@@ -69,16 +72,17 @@ const styles = {
     cursor: "pointer"
   },
   textContainer: {
-    padding: "6px 10px",
+    padding: "6px 60px",
     backgroundColor: "lightgreen",
     fontSize: "10px",
     textAlign:'center',
   },
-  image: {
-    width: "100%",
-    height: "120px",
-    objectFit: "cover"
-  }
+image: {
+  width: "100%",        
+  height: "100px",      
+  objectFit: "cover",   
+  borderRadius: "4px"  
+}
 };
 
 export default CommonCard;

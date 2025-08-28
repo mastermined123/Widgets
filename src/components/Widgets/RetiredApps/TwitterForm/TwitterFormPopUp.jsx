@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
-const BirthdayImagePopup = ({ image, duration, onClose }) => {
+const TwitterFormPopUp = ({ image, duration, onClose }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -105,4 +105,4 @@ const styles = {
   },
 };
 
-export default BirthdayImagePopup;
+export default TwitterFormPopUp;

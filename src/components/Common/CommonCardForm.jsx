@@ -31,7 +31,10 @@ import TextScrollerForm from "../Widgets/TextAndScroller/TextScroller/TextScroll
 import SimpleTableForm from "../Widgets/MenuBoard/Simple_Table/SimpleTableForm";
 import ConfigureNewsRssForm from "../Widgets/Rss_Neews_Feeds/Configure_News_Rss/ConfigureNewsRssForm";
 import TextTickerForm from "../Widgets/TextAndScroller/Text_Thicker/Text_TickerForm";
-import WebsiteLinkForm from "../Widgets/WebandMedia/WebsiteLink/WebsiteLinkForm";
+// import WebsiteLinkForm from "../Widgets/WebandMedia/WebsiteLink/WebsiteLinkForm";
+import VerticalTextForm from "../Widgets/TextAndScroller/Vertical_Text/VerticalTextForm";
+import TwitterForm from "../Widgets/RetiredApps/TwitterForm/TwitterForm";
+import SimpleWeatherForm from "../Widgets/Weather/SimpleWeather/SimpleWeatherForm";
 
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
@@ -76,8 +79,8 @@ const renderDynamicContent = () => {
           return <WeatherApp card={card} />;
         case "modern_weather_forecast_tall_bar":
           return <ModernWeatherForecastTallandBarMain card={card} />;
-        // case "digital_clock_simple":
-        //   return <DigitalClockSimpleForm card={card} />;
+        case "simple_weather_app":
+          return <SimpleWeatherForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
@@ -204,6 +207,8 @@ const renderDynamicContent = () => {
 
     case "news_rss_feeds":
       switch (card.cardType) {
+        case "configurable_news":
+          return <ConfigureNewsRssForm card={card} />;
         case "configurable_rss_news":
           return <ConfigureNewsRssForm card={card} />;
         case "news_scroller_1":
@@ -220,25 +225,37 @@ const renderDynamicContent = () => {
           return <TextScrollerForm card={card} />;
         case "text_ticker":
           return <TextTickerForm card={card} />;
-        // case "rich_text_widget":
+        case "vertical_text_ticker":
+          return <VerticalTextForm card={card} />;
+
+          // case "rich_text_widget":
         //   return <RichTextWidgetForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
 
-    case "web_media":
+
+          case "retired_apps":
       switch (card.cardType) {
-        case "website_link":
-          return <WebsiteLinkForm onClose={onBack} />;
-        // case "media_cycling_app":
-        //   return <AmericanFootball card={card} />;
-        // case "photos":
-        //   return <AmericanFootball card={card} />;
-        // case "streaming_video_link_1":
-        //   return <AmericanFootball card={card} />;
+        case "twitter_modern":
+          return <TwitterForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
+      
+    // case "web_media":
+    //   switch (card.cardType) {
+    //     case "website_link":
+    //       return <WebsiteLinkForm onClose={onBack} />;
+    //     // case "media_cycling_app":
+    //     //   return <AmericanFootball card={card} />;
+    //     // case "photos":
+    //     //   return <AmericanFootball card={card} />;
+    //     // case "streaming_video_link_1":
+    //     //   return <AmericanFootball card={card} />;
+    //     default:
+    //       return <AmericanFootball card={card} />;
+    //   }
 
     default:
       return <AmericanFootball card={card} />;

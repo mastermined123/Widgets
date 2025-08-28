@@ -4,7 +4,8 @@ import HomeContent from './components/Home/HomeContent';
 import MediaCards from './components/TopBar/MediaCard';
 import { Dialog } from "@mui/material";
 import { analog_round_clock ,clock_bar_classic, clock_bar_modern, countdown_app, digital_clock_simple, watch1,watch2,
-  watch3, watch4, watch5, watch6, watch7, watch8, directory_list, rich_text_widget
+  watch3, watch4, watch5, watch6, watch7, watch8, directory_list, rich_text_widget, seven_days_exchange_rate, currency_exchange_scroller,
+  exchange_rate, simple_weather_app, modern_weather_forecast, multi_city_weather
 } from './constant/clockURL.js';
 
 
@@ -224,7 +225,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1667239426890-dc8bf557397a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YW5pbWFsJTIwZmFjdHN8ZW58MHx8MHx8fDA%3D"
+      imageSrc: "https://cdn.pixabay.com/photo/2020/06/11/18/18/guinea-pig-5287749_1280.jpg"
        },
     {
       id: 33,
@@ -377,7 +378,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661443781814-333019eaad2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+      imageSrc: seven_days_exchange_rate,
     },
     {
       id: 41,
@@ -386,7 +387,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661443781814-333019eaad2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+      imageSrc: currency_exchange_scroller,
     },
     {
       id: 42,
@@ -395,7 +396,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661443781814-333019eaad2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+      imageSrc: exchange_rate,
     },
     {
       id: 43,
@@ -404,7 +405,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661443781814-333019eaad2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRZ84bFtHBkAVRW5o0HGOuoJgqAyvDB9zpeg&s"
     },
     {
       id: 44,
@@ -413,7 +414,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661443781814-333019eaad2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBV3Tiw5hrUesmWk7qBTrgUWY0UBSTq6Qrqg&s"
     },
     {
       id: 45,
@@ -779,6 +780,16 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D",
     },
+        {
+      id: 702,
+      cardType: "news_scroller_1",
+      title: "News Scroller",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Data Feed Enabled",
+      imageSrc: "https://plus.unsplash.com/premium_photo-1688561383203-31fed3d85417?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG5ld3N8ZW58MHx8MHx8fDA%3D",
+    },
+
     {
       id: 72,
       cardType: "creative_news_feed",
@@ -868,15 +879,6 @@ const categories = [
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
       imageSrc: "https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG5ld3N8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 702,
-      cardType: "news_scroller_1",
-      title: "News Scroller",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Data Feed Enabled",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1688561383203-31fed3d85417?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG5ld3N8ZW58MHx8MHx8fDA%3D",
     },
     {
       id: 703,
@@ -1065,15 +1067,6 @@ const categories = [
   type: "other",
   cards: [    
     {
-      id: 91,
-      cardType: "airport_flight_status",
-      title: "Airport Flight Status",
-      showWorldIcon: true,
-      showDatabaseIcon: false,
-      textContainer: "Stay connected",
-      imageSrc: "https://images.unsplash.com/photo-1745237851586-50ce6255e1fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFpcnBvcnRfZmxpZ2h0X3N0YXR1c3xlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
       id: 92,
       cardType: "audio_announcement_app",
       title: "Audio Announcement App",
@@ -1081,6 +1074,26 @@ const categories = [
       showDatabaseIcon: true,
       textContainer: "Automated announcements",
       imageSrc: "https://images.unsplash.com/photo-1602973240044-ac77578f6dc5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fEF1ZGlvJTIwQW5ub3VuY2VtZW50fGVufDB8fDB8fHww",
+    },
+        {
+      id: 95,
+      cardType: "weather_exchange_ticker",
+      title: "Weather + Exchange - Ticker",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Live weather & currency",
+      imageSrc: "https://plus.unsplash.com/premium_photo-1661611270994-637a2a80a309?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZXhjaGFuZ2V8ZW58MHx8MHx8fDA%3D",
+    },
+
+
+    {
+      id: 91,
+      cardType: "airport_flight_status",
+      title: "Airport Flight Status",
+      showWorldIcon: true,
+      showDatabaseIcon: false,
+      textContainer: "Stay connected",
+      imageSrc: "https://images.unsplash.com/photo-1745237851586-50ce6255e1fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFpcnBvcnRfZmxpZ2h0X3N0YXR1c3xlbnwwfHwwfHx8MA%3D%3D",
     },
     {
       id: 93,
@@ -1099,16 +1112,7 @@ const categories = [
       showDatabaseIcon: false,
       textContainer: "External source enabled",
       imageSrc: "https://images.unsplash.com/photo-1583259034006-5ea8361109e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8SERNSSUyMElucHV0fGVufDB8fDB8fHww",
-    },
-    {
-      id: 95,
-      cardType: "weather_exchange_ticker",
-      title: "Weather + Exchange - Ticker",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Live weather & currency",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661611270994-637a2a80a309?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZXhjaGFuZ2V8ZW58MHx8MHx8fDA%3D",
-    },
+    }
   ]
 }
 
@@ -1118,6 +1122,15 @@ const categories = [
   name: "Social Network",
   type: "social_network",
   cards: [
+        {
+      id: 103,
+      cardType: "facebook_page",
+      title: "Facebook Page",
+      showWorldIcon: true,
+      showDatabaseIcon: false,
+      textContainer: "Facebook",
+      imageSrc: "https://img.freepik.com/free-vector/facebook-mobile-post-with-flat-design_23-2147820035.jpg?semt=ais_hybrid&w=740&q=80",
+    },
     {
       id: 101,
       cardType: "animated_facebook_app",
@@ -1127,6 +1140,17 @@ const categories = [
       textContainer: "Facebook",
       imageSrc: "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjZWJvb2t8ZW58MHx8MHx8fDA%3D",
     },
+
+        {
+      id: 107,
+      cardType: "youtube_video",
+      title: "YouTube Video",
+      showWorldIcon: true,
+      showDatabaseIcon: false,
+      textContainer: "YouTube",
+      imageSrc: "https://images.unsplash.com/photo-1521302200778-33500795e128?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW91dHViZXxlbnwwfHwwfHx8MA%3D%3D",
+    },
+
     {
       id: 102,
       cardType: "facebook_modern",
@@ -1135,15 +1159,6 @@ const categories = [
       showDatabaseIcon: true,
       textContainer: "Facebook",
       imageSrc: "https://images.unsplash.com/photo-1594670297948-e910d5964979?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8RmFjZWJvb2t8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 103,
-      cardType: "facebook_page",
-      title: "Facebook Page",
-      showWorldIcon: true,
-      showDatabaseIcon: false,
-      textContainer: "Facebook",
-      imageSrc: "https://img.freepik.com/free-vector/facebook-mobile-post-with-flat-design_23-2147820035.jpg?semt=ais_hybrid&w=740&q=80",
     },
     {
       id: 104,
@@ -1171,15 +1186,6 @@ const categories = [
       showDatabaseIcon: false,
       textContainer: "Walls.io",
       imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnkWvHzJw4_v_M_kVuqIHcrfUm3TnP3hV55Q&s",
-    },
-    {
-      id: 107,
-      cardType: "youtube_video",
-      title: "YouTube Video",
-      showWorldIcon: true,
-      showDatabaseIcon: false,
-      textContainer: "YouTube",
-      imageSrc: "https://images.unsplash.com/photo-1521302200778-33500795e128?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW91dHViZXxlbnwwfHwwfHx8MA%3D%3D",
     },
   ]
 }
@@ -1253,15 +1259,6 @@ const categories = [
   type: "text_and_scrollers",
   cards: [
     {
-      id: 121,
-      cardType: "message_app",
-      title: "Message App",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Message App",
-      imageSrc: "https://cdn.pixabay.com/photo/2018/05/18/15/16/message-3411360_1280.jpg",
-    },
-    {
       id: 122,
       cardType: "qr_code",
       title: "QR Code",
@@ -1270,14 +1267,15 @@ const categories = [
       textContainer: "QR Code",
       imageSrc: "https://cdn.pixabay.com/photo/2023/02/28/01/50/qr-code-7819652_1280.jpg",
     },
+
     {
-      id: 123,
-      cardType: "rich_text_widget",
-      title: "Rich Text Widget",
+      id: 121,
+      cardType: "message_app",
+      title: "Message App",
       showWorldIcon: true,
       showDatabaseIcon: true,
-      textContainer: "Rich Text Widget",
-      imageSrc: rich_text_widget,
+      textContainer: "Message App",
+      imageSrc: "https://cdn.pixabay.com/photo/2018/05/18/15/16/message-3411360_1280.jpg",
     },
     {
       id: 124,
@@ -1305,6 +1303,16 @@ const categories = [
       showDatabaseIcon: true,
       textContainer: "Vertical Text Ticker",
       imageSrc: "https://www.bwillcreative.com/wp-content/uploads/2022/08/how-to-create-vertical-text-in-photoshop-9.jpg",
+    },
+
+    {
+      id: 123,
+      cardType: "rich_text_widget",
+      title: "Rich Text Widget",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Rich Text Widget",
+      imageSrc: rich_text_widget,
     },
   ],
 }
@@ -1374,7 +1382,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Modern Weather Forecast",
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAHD0fBaYS9bKXRQPflaYsfT5b3NVGvhLB1w&s",
+      imageSrc: modern_weather_forecast,
     },
     {
       id: 142,
@@ -1383,8 +1391,18 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Modern Weather Forecast Tall and Bar",
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAHD0fBaYS9bKXRQPflaYsfT5b3NVGvhLB1w&s",
+      imageSrc: "https://d4.alternativeto.net/TIJbKlKV2ctGfGxCfZwUVTc4p_EGKyaHxTRBTtr7i7s/rs:fill:309:197:1/g:no:0:0/YWJzOi8vZGlzdC9zL25pbWJ1cy13ZWF0aGVyXzU5MTAzMF9mdWxsLnBuZw.jpg",
     },
+        {
+      id: 147,
+      cardType: "simple_weather_app",
+      title: "Simple Weather App",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Simple Weather App",
+      imageSrc: simple_weather_app,
+    },
+
     {
       id: 143,
       cardType: "multi_city_weather",
@@ -1392,7 +1410,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Multi City Weather",
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAHD0fBaYS9bKXRQPflaYsfT5b3NVGvhLB1w&s",
+      imageSrc: multi_city_weather,
     },
     {
       id: 144,
@@ -1419,15 +1437,6 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Multi Day Weather",
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAHD0fBaYS9bKXRQPflaYsfT5b3NVGvhLB1w&s",
-    },
-    {
-      id: 147,
-      cardType: "simple_weather_app",
-      title: "Simple Weather App",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Simple Weather App",
       imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAHD0fBaYS9bKXRQPflaYsfT5b3NVGvhLB1w&s",
     },
     {
@@ -1492,6 +1501,16 @@ const categories = [
   name: "Web & Media",
   type: "web_media",
   cards: [
+        {
+      id: 156,
+      cardType: "website_link",
+      title: "Website Link",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Streaming Video Link",
+      imageSrc: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3RyZWFtaW5nfGVufDB8fDB8fHww",
+    }
+,
     {
       id: 153,
       cardType: "media_cycling_app",
@@ -1508,7 +1527,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Photos",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1696408290876-4c8b13a921c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBob3RvcyUyMGFsYnVtc3xlbnwwfHwwfHx8MA%3D%3D",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyji0OOZzom5SKy1HkszGHVr6jKVCoBQVOkA&s",
     },
     {
       id: 155,
@@ -1519,15 +1538,6 @@ const categories = [
       textContainer: "Streaming Video Link",
       imageSrc: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3RyZWFtaW5nfGVufDB8fDB8fHww",
     },
-    {
-      id: 156,
-      cardType: "website_link",
-      title: "Website Link",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Streaming Video Link",
-      imageSrc: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3RyZWFtaW5nfGVufDB8fDB8fHww",
-    }
   ]
 }
 ,
@@ -1539,7 +1549,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Twitter Modern",
-      imageSrc: "https://images.unsplash.com/photo-1610270197941-925ce9015c40?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fFR3aXR0ZXIlMjBNb2Rlcm58ZW58MHx8MHx8fDA%3D",
+      imageSrc: "data:image/png;base64,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",
     }
 ]
    }
