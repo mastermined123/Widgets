@@ -667,7 +667,7 @@ const categories = [
       imageSrc:
         directory_list,
     },
-        {
+    {
       id: 67,
       cardType: "simple_table",
       title: "Simple Table",
