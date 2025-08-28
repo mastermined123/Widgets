@@ -4,7 +4,7 @@ import HomeContent from './components/Home/HomeContent';
 import MediaCards from './components/TopBar/MediaCard';
 import { Dialog } from "@mui/material";
 import { analog_round_clock ,clock_bar_classic, clock_bar_modern, countdown_app, digital_clock_simple, watch1,watch2,
-  watch3, watch4, watch5, watch6, watch7, watch8, directory_list
+  watch3, watch4, watch5, watch6, watch7, watch8, directory_list, rich_text_widget
 } from './constant/clockURL.js';
 
 
@@ -667,7 +667,19 @@ const categories = [
       imageSrc:
         directory_list,
     },
+        {
+      id: 67,
+      cardType: "simple_table",
+      title: "Simple Table",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Data Feed Enabled",
+      imageSrc:
+        "https://images.unsplash.com/photo-1743811928684-f134eba5e956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fE1lbnUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D",
+    },
+
     {
+
       id: 62,
       cardType: "menu_board_basic",
       title: "Menu Board - Basic",
@@ -716,16 +728,6 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc:
         "https://images.unsplash.com/photo-1599250300435-b9693f21830d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TWVudSUyMGJvYXJkfGVufDB8fDB8fHww",
-    },
-    {
-      id: 67,
-      cardType: "simple_table",
-      title: "Simple Table",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Data Feed Enabled",
-      imageSrc:
-        "https://images.unsplash.com/photo-1743811928684-f134eba5e956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fE1lbnUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D",
     },
     {
       id: 68,
@@ -1257,7 +1259,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Message App",
-      imageSrc: "https://images.unsplash.com/photo-1514464750060-00e6e34c8b8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1lc3NhZ2V8ZW58MHx8MHx8fDA%3D",
+      imageSrc: "https://cdn.pixabay.com/photo/2018/05/18/15/16/message-3411360_1280.jpg",
     },
     {
       id: 122,
@@ -1266,7 +1268,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "QR Code",
-      imageSrc: "https://images.unsplash.com/photo-1595079676601-f1adf5be5dee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHFyJTIwY29kZXxlbnwwfHwwfHx8MA%3D%3D",
+      imageSrc: "https://cdn.pixabay.com/photo/2023/02/28/01/50/qr-code-7819652_1280.jpg",
     },
     {
       id: 123,
@@ -1275,7 +1277,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Rich Text Widget",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1719575633377-89d539244e95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UmljaCUyMFRleHQlMjBXaWRnZXR8ZW58MHx8MHx8fDA%3D",
+      imageSrc: rich_text_widget,
     },
     {
       id: 124,
@@ -1284,7 +1286,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Text Scroller",
-      imageSrc: "https://images.unsplash.com/photo-1592496000931-e50d83df1286?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHRleHR8ZW58MHx8MHx8fDA%3D",
+      imageSrc: "https://cdn.pixabay.com/photo/2015/06/01/09/00/adwords-793034_1280.jpg",
     },
     {
       id: 125,
@@ -1293,7 +1295,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Text Ticker",
-      imageSrc: "https://images.unsplash.com/photo-1633989464081-16ccd31287a1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHRleHR8ZW58MHx8MHx8fDA%3D",
+      imageSrc: "https://cdn.pixabay.com/photo/2020/02/07/14/22/dream-4827288_1280.jpg",
     },
     {
       id: 126,
@@ -1302,7 +1304,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Vertical Text Ticker",
-      imageSrc: "https://images.unsplash.com/photo-1604440976150-c12352c982ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGV4dHxlbnwwfHwwfHx8MA%3D%3D",
+      imageSrc: "https://www.bwillcreative.com/wp-content/uploads/2022/08/how-to-create-vertical-text-in-photoshop-9.jpg",
     },
   ],
 }

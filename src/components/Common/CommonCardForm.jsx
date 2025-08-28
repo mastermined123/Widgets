@@ -28,6 +28,9 @@ import DirectoryForm from "../Widgets/MenuBoard/Directory_List/DirectoryListForm
 // import TextTickerForm from "../Widgets/TextAndScroller/TextTicker/TextTickerForm";
 // import RichTextWidgetForm from "../Widgets/TextAndScroller/RichTextWidget/RichTextWidgetForm";
 import TextScrollerForm from "../Widgets/TextAndScroller/TextScroller/TextScrollerForm";
+import SimpleTableForm from "../Widgets/MenuBoard/Simple_Table/SimpleTableForm";
+import ConfigureNewsRssForm from "../Widgets/Rss_Neews_Feeds/Configure_News_Rss/ConfigureNewsRssForm";
+import TextTickerForm from "../Widgets/TextAndScroller/Text_Thicker/Text_TickerForm";
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
   if (!card) return null;
@@ -215,12 +218,27 @@ const renderDynamicContent = () => {
           return <CafeTeriaForm card={card} />;
         case "sales_app_modern":
           return <CafeTeriaForm card={card} />;
+        case "simple_table":
+          return <SimpleTableForm card={card} />;
           default:
           return (
 <AmericanFootball card={card} />
           );
       }
 
+
+
+    case "news_rss_feeds":
+      switch (card.cardType) {
+        case "configurable_rss_news":
+          return <ConfigureNewsRssForm card={card} />;
+        case "news_scroller_1":
+                  return <ExchangeSellerTwo card={card} />;
+              default:
+              return (
+    <AmericanFootball card={card} />
+              );
+          }
 
 
 
@@ -230,8 +248,10 @@ const renderDynamicContent = () => {
           return <QRCodeForm card={card} />;
               case "text_scroller":
               return <TextScrollerForm card={card} />;
-    //     // case "rich_text_widget":
-    //     //   return <RichTextWidgetForm card={card} />;
+              case "text_ticker":
+              return <TextTickerForm card={card} />;
+        // case "rich_text_widget":
+        //   return <RichTextWidgetForm card={card} />;
         default:
           return (
             <AmericanFootball card={card} />
