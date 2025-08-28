@@ -1521,8 +1521,8 @@ const categories = [
     },
     {
       id: 156,
-      cardType: "streaming_video_link_2",
-      title: "Streaming Video Link",
+      cardType: "website_link",
+      title: "Website Link",
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Streaming Video Link",

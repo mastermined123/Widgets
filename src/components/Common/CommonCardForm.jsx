@@ -31,6 +31,8 @@ import TextScrollerForm from "../Widgets/TextAndScroller/TextScroller/TextScroll
 import SimpleTableForm from "../Widgets/MenuBoard/Simple_Table/SimpleTableForm";
 import ConfigureNewsRssForm from "../Widgets/Rss_Neews_Feeds/Configure_News_Rss/ConfigureNewsRssForm";
 import TextTickerForm from "../Widgets/TextAndScroller/Text_Thicker/Text_TickerForm";
+import WebsiteLinkForm from "../Widgets/WebandMedia/WebsiteLink/WebsiteLinkForm";
+
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
   if (!card) return null;
@@ -53,108 +55,95 @@ const renderDynamicContent = () => {
         case "simple_weather_app":
           return <WeatherApp card={card} />;
         default:
-          return (
-           <AmericanFootball card={card} />
-          );
+          return <AmericanFootball card={card} />;
       }
 
     case "clock":
       switch (card.cardType) {
         case "analog_round_clock":
           return <AnalogRoundClockForm card={card} />;
-         case "analog_square_clock":
-           return <AnalogSquareClockForm card={card} />;
+        case "analog_square_clock":
+          return <AnalogSquareClockForm card={card} />;
         case "digital_clock_simple":
           return <DigitalClockSimpleForm card={card} />;
         default:
-          return (
-           <AmericanFootball card={card} />
-          );
+          return <AmericanFootball card={card} />;
       }
 
-    
-     case "weather":
-        switch (card.cardType) {
-          case "modern_weather_forecast":
-            return <WeatherApp card={card} />;
-            case "modern_weather_forecast_tall_bar":
-              return <ModernWeatherForecastTallandBarMain card={card} />;
-          // case "digital_clock_simple":
-          //   return <DigitalClockSimpleForm card={card} />;
-          default:
-            return (
-             <AmericanFootball card={card} />
-            );
-        }
+    case "weather":
+      switch (card.cardType) {
+        case "modern_weather_forecast":
+          return <WeatherApp card={card} />;
+        case "modern_weather_forecast_tall_bar":
+          return <ModernWeatherForecastTallandBarMain card={card} />;
+        // case "digital_clock_simple":
+        //   return <DigitalClockSimpleForm card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
 
-      case "entertainment":
-          switch (card.cardType) {
-              case "american_football_entertainment":
-                  return <FormEntertainMent card={card} />;
-              case "animal_facts":
-                  return <FormEntertainMent card={card} />;
-              case "baseball_curiosities":
-                  return <FormEntertainMent card={card} />;
-              case "basketball":
-                  return <FormEntertainMent card={card} />;
-              case "cricket_facts":
-                  return <FormEntertainMent card={card} />;
-              case "famous_quotes_1":
-                  return <FamousQuotes card={card} />;
-              case "famous_quotes_2":
-                  return <FamousQuotes card={card} />;
-              case "famous_quotes_3":
-                  return <FamousQuotes card={card} />;
-              case "health_tips":
-                  return <FormEntertainMent card={card} />;
-              case "ice_hockey_facts":
-                  return <FormEntertainMent card={card} />;
-              case "quiz_trivia":
-                  return <FormEntertainMent card={card} />;
-              case "rugby_facts":
-                  return <FormEntertainMent card={card} />;
-              case "scientific_curiosities":
-                  return <FormEntertainMent card={card} />;
-              case "today_in_history":
-                  return <FormEntertainMent card={card} />;
-              case "travel":
-                  return <FormEntertainMent card={card} />;
-              case "upcoming_movies":
-                  return <FormEntertainMent card={card} />;
-              case "volleyball":
-                  return <FormEntertainMent card={card} />;
-              default:
-                  return (
-           <AmericanFootball card={card} />
-                  );
-          }
-   case "finance":
-          switch (card.cardType) {
-              case "seven_days_exchange_rate":
-                  return <FinacneExchangeRate card={card} />;
-              case "currency_exchange_scroller":
-                  return <ExchangeSellerTwo card={card} />;
-              case "exchange_rate":
-                  return <ExchangeRateForm card={card} />;
-              default:
-                  return (
-           <AmericanFootball card={card} />
-                  );
-          }
+    case "entertainment":
+      switch (card.cardType) {
+        case "american_football_entertainment":
+          return <FormEntertainMent card={card} />;
+        case "animal_facts":
+          return <FormEntertainMent card={card} />;
+        case "baseball_curiosities":
+          return <FormEntertainMent card={card} />;
+        case "basketball":
+          return <FormEntertainMent card={card} />;
+        case "cricket_facts":
+          return <FormEntertainMent card={card} />;
+        case "famous_quotes_1":
+          return <FamousQuotes card={card} />;
+        case "famous_quotes_2":
+          return <FamousQuotes card={card} />;
+        case "famous_quotes_3":
+          return <FamousQuotes card={card} />;
+        case "health_tips":
+          return <FormEntertainMent card={card} />;
+        case "ice_hockey_facts":
+          return <FormEntertainMent card={card} />;
+        case "quiz_trivia":
+          return <FormEntertainMent card={card} />;
+        case "rugby_facts":
+          return <FormEntertainMent card={card} />;
+        case "scientific_curiosities":
+          return <FormEntertainMent card={card} />;
+        case "today_in_history":
+          return <FormEntertainMent card={card} />;
+        case "travel":
+          return <FormEntertainMent card={card} />;
+        case "upcoming_movies":
+          return <FormEntertainMent card={card} />;
+        case "volleyball":
+          return <FormEntertainMent card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
+    case "finance":
+      switch (card.cardType) {
+        case "seven_days_exchange_rate":
+          return <FinacneExchangeRate card={card} />;
+        case "currency_exchange_scroller":
+          return <ExchangeSellerTwo card={card} />;
+        case "exchange_rate":
+          return <ExchangeRateForm card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
 
-      case "social_network":
-        switch (card.cardType) {
-          case "youtube_video":
-            return <YouTubeForm card={card} />;
-          case "facebook_page":
-            return <FacebookPageForm card={card} />;
-          case "animated_facebook_app":
-            return <AnimatedFacebookAppMain card={card} />;
-          default:
-            return (
-              <AmericanFootball card={card} />
-            );
-        }
+    case "social_network":
+      switch (card.cardType) {
+        case "youtube_video":
+          return <YouTubeForm card={card} />;
+        case "facebook_page":
+          return <FacebookPageForm card={card} />;
+        case "animated_facebook_app":
+          return <AnimatedFacebookAppMain card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
 
     case "other":
       switch (card.cardType) {
@@ -163,9 +152,7 @@ const renderDynamicContent = () => {
         case "weather_exchange_ticker":
           return <WeatherExchangeForm card={card} />;
         default:
-          return (
-          <AmericanFootball card={card} />
-          );
+          return <AmericanFootball card={card} />;
       }
 
     case "office":
@@ -173,24 +160,17 @@ const renderDynamicContent = () => {
         case "employee_of_the_month":
           return <EmployeeForm card={card} />;
         case "new_employee":
-          return <NewEmployee card={card} />;          
+          return <NewEmployee card={card} />;
         case "our_team":
-          return <NewEmployee card={card} />;          
+          return <NewEmployee card={card} />;
         case "success_cases":
-          return <NewEmployee card={card} />;          
+          return <NewEmployee card={card} />;
         case "testimonials":
-          return <NewEmployee card={card} />;          
-          default:
-          return (
-<AmericanFootball card={card} />
-          );
+          return <NewEmployee card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
       }
 
-      
-
-
-      
-      
     case "meeting_room_calendar":
       switch (card.cardType) {
         case "calendar_app":
@@ -200,10 +180,8 @@ const renderDynamicContent = () => {
         case "birthday_announcement_2":
           return <BirthdayAnnouncement card={card} />;
 
-          default:
-          return (
-<AmericanFootball card={card} />
-          );
+        default:
+          return <AmericanFootball card={card} />;
       }
 
     case "menu_boards_tables":
@@ -220,48 +198,50 @@ const renderDynamicContent = () => {
           return <CafeTeriaForm card={card} />;
         case "simple_table":
           return <SimpleTableForm card={card} />;
-          default:
-          return (
-<AmericanFootball card={card} />
-          );
+        default:
+          return <AmericanFootball card={card} />;
       }
-
-
 
     case "news_rss_feeds":
       switch (card.cardType) {
         case "configurable_rss_news":
           return <ConfigureNewsRssForm card={card} />;
         case "news_scroller_1":
-                  return <ExchangeSellerTwo card={card} />;
-              default:
-              return (
-    <AmericanFootball card={card} />
-              );
-          }
+          return <ExchangeSellerTwo card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
 
-
-
-     case "text_and_scrollers":
+    case "text_and_scrollers":
       switch (card.cardType) {
         case "qr_code":
           return <QRCodeForm card={card} />;
-              case "text_scroller":
-              return <TextScrollerForm card={card} />;
-              case "text_ticker":
-              return <TextTickerForm card={card} />;
+        case "text_scroller":
+          return <TextScrollerForm card={card} />;
+        case "text_ticker":
+          return <TextTickerForm card={card} />;
         // case "rich_text_widget":
         //   return <RichTextWidgetForm card={card} />;
         default:
-          return (
-            <AmericanFootball card={card} />
-          );
-      }      
-   
-      default:
-      return (
-<AmericanFootball card={card} />
-      );
+          return <AmericanFootball card={card} />;
+      }
+
+    case "web_media":
+      switch (card.cardType) {
+        case "website_link":
+          return <WebsiteLinkForm onClose={onBack} />;
+        // case "media_cycling_app":
+        //   return <AmericanFootball card={card} />;
+        // case "photos":
+        //   return <AmericanFootball card={card} />;
+        // case "streaming_video_link_1":
+        //   return <AmericanFootball card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
+
+    default:
+      return <AmericanFootball card={card} />;
   }
 };
 
