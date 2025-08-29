@@ -49,6 +49,7 @@ import SoccerLeaugueTableForm from "../Widgets/Sports/SoccerLeaugueTable/SoccerL
 import AirPortFlightStatusForm from "../Widgets/Other/AirportFlightStatus/AirPortFlightStatusForm";
 import CountDownClockForm from "../Widgets/Clock/CountDownClock/CountDownClockForm";
 import MultiDayWeatherMain from "../Widgets/Weather/MultiDayWeather/MultiDayWeatherMain";
+import HolidayClockForm from "../Widgets/Clock/HolidayClock/HolidayClockForm";
 
 
 
@@ -87,6 +88,8 @@ const renderDynamicContent = () => {
           return <DigitalClockSimpleForm card={card} />;
         case "countdown_app":
           return <CountDownClockForm card={card} />;
+         case "holiday_clock":
+          return <HolidayClockForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
