@@ -31,10 +31,20 @@ import TextScrollerForm from "../Widgets/TextAndScroller/TextScroller/TextScroll
 import SimpleTableForm from "../Widgets/MenuBoard/Simple_Table/SimpleTableForm";
 import ConfigureNewsRssForm from "../Widgets/Rss_Neews_Feeds/Configure_News_Rss/ConfigureNewsRssForm";
 import TextTickerForm from "../Widgets/TextAndScroller/Text_Thicker/Text_TickerForm";
-// import WebsiteLinkForm from "../Widgets/WebandMedia/WebsiteLink/WebsiteLinkForm";
+import WebsiteLinkForm from "../Widgets/WebandMedia/WebsiteLink/WebsiteLinkForm";
 import VerticalTextForm from "../Widgets/TextAndScroller/Vertical_Text/VerticalTextForm";
 import TwitterForm from "../Widgets/RetiredApps/TwitterForm/TwitterForm";
 import SimpleWeatherForm from "../Widgets/Weather/SimpleWeather/SimpleWeatherForm";
+import StreamingVideoLinkForm from "../Widgets/WebandMedia/StreamingVideoLink/StreamingVideoLinkForm";
+import MediaCyclingAppForm from "../Widgets/WebandMedia/MediaCyclingApp/MediaCyclingAppForm";
+import ScreenfeedForm from "../Widgets/ThirdParty/Screenfeed/ScreenfeedForm";
+import GeckoBoardForm from "../Widgets/ThirdParty/GeckoBoard/GeckoBoardForm";
+import KlipfoloiForm from "../Widgets/ThirdParty/Klipfoloi/KlipfoloiForm";
+import StreamaForm from "../Widgets/ThirdParty/Streama/StreamaForm";
+import FlightStatusForm from "../Widgets/Other/FlightStatus/FlightStatusForm";
+import MatchScoreForm from "../Widgets/Sports/MatchScore/MatchScoreForm";
+
+
 
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
@@ -154,7 +164,11 @@ const renderDynamicContent = () => {
           return <AudioWidgetForm card={card} />;
         case "weather_exchange_ticker":
           return <WeatherExchangeForm card={card} />;
-        default:
+        case "flight_status":
+          return <FlightStatusForm card={card} />;
+        case "airport_flight_status":
+          return <FlightStatusForm card={card} />;
+          default:
           return <AmericanFootball card={card} />;
       }
 
@@ -243,19 +257,43 @@ const renderDynamicContent = () => {
           return <AmericanFootball card={card} />;
       }
       
-    // case "web_media":
-    //   switch (card.cardType) {
-    //     case "website_link":
-    //       return <WebsiteLinkForm onClose={onBack} />;
-    //     // case "media_cycling_app":
-    //     //   return <AmericanFootball card={card} />;
-    //     // case "photos":
-    //     //   return <AmericanFootball card={card} />;
-    //     // case "streaming_video_link_1":
-    //     //   return <AmericanFootball card={card} />;
-    //     default:
-    //       return <AmericanFootball card={card} />;
-    //   }
+    case "web_media":
+      switch (card.cardType) {
+        case "website_link":
+          return <WebsiteLinkForm onClose={onBack} />;
+        case "streaming_video_link_1":
+          return <StreamingVideoLinkForm card={card} />;
+         case "media_cycling_app":
+           return <MediaCyclingAppForm card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
+
+    case "third_party":
+      switch (card.cardType) {
+        case "screenfeed":
+          return <ScreenfeedForm card={card} />;
+        case "geckoboard":
+          return <GeckoBoardForm card={card} />;
+        case "klipfolio":
+          return <KlipfoloiForm card={card} />;
+        case "streama":
+          return <StreamaForm card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+      }
+
+
+    case "sports":
+      switch (card.cardType) {
+        case "match_score_widget":
+          return <MatchScoreForm card={card} />;
+        default:
+          return <AmericanFootball card={card} />;
+        }
+
+
+      
 
     default:
       return <AmericanFootball card={card} />;

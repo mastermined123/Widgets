@@ -5,8 +5,9 @@ import MediaCards from './components/TopBar/MediaCard';
 import { Dialog } from "@mui/material";
 import { analog_round_clock ,clock_bar_classic, clock_bar_modern, countdown_app, digital_clock_simple, watch1,watch2,
   watch3, watch4, watch5, watch6, watch7, watch8, directory_list, rich_text_widget, seven_days_exchange_rate, currency_exchange_scroller,
-  exchange_rate, simple_weather_app, modern_weather_forecast, multi_city_weather
+  exchange_rate, simple_weather_app, modern_weather_forecast, multi_city_weather, flight_status, airport_flight_status, audio_announcement_app
 } from './constant/clockURL.js';
+
 
 
 const categories = [
@@ -1073,7 +1074,7 @@ const categories = [
       showWorldIcon: false,
       showDatabaseIcon: true,
       textContainer: "Automated announcements",
-      imageSrc: "https://images.unsplash.com/photo-1602973240044-ac77578f6dc5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fEF1ZGlvJTIwQW5ub3VuY2VtZW50fGVufDB8fDB8fHww",
+      imageSrc: audio_announcement_app,
     },
         {
       id: 95,
@@ -1082,7 +1083,16 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Live weather & currency",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661611270994-637a2a80a309?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZXhjaGFuZ2V8ZW58MHx8MHx8fDA%3D",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeIGsdF3S62W8eOqFJZB3zzadTqf3uX82HUQ&s",
+    },
+    {
+      id: 93,
+      cardType: "flight_status",
+      title: "Flight Status",
+      showWorldIcon: true,
+      showDatabaseIcon: false,
+      textContainer: "Real-time updates",
+      imageSrc: flight_status,
     },
 
 
@@ -1093,16 +1103,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: false,
       textContainer: "Stay connected",
-      imageSrc: "https://images.unsplash.com/photo-1745237851586-50ce6255e1fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFpcnBvcnRfZmxpZ2h0X3N0YXR1c3xlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: 93,
-      cardType: "flight_status",
-      title: "Flight Status",
-      showWorldIcon: true,
-      showDatabaseIcon: false,
-      textContainer: "Real-time updates",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1661274025419-4c54107d5c48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fEZsaWdodCUyMFN0YXR1c3xlbnwwfHwwfHx8MA%3D%3D",
+      imageSrc: airport_flight_status,
     },
     {
       id: 94,
@@ -1111,7 +1112,7 @@ const categories = [
       showWorldIcon: false,
       showDatabaseIcon: false,
       textContainer: "External source enabled",
-      imageSrc: "https://images.unsplash.com/photo-1583259034006-5ea8361109e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8SERNSSUyMElucHV0fGVufDB8fDB8fHww",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLifEzS0VtGR2hxM91msDulwtJMLVcdyTQdA&s",
     }
   ]
 }
