@@ -47,6 +47,8 @@ import SoccerScoreForm from "../Widgets/Sports/SoccerScore/SoccerScoreForm";
 import SoccerTableFrom from "../Widgets/Sports/SoccerTable/SoccerTableForm";
 import SoccerLeaugueTableForm from "../Widgets/Sports/SoccerLeaugueTable/SoccerLeaugueTableForm";
 import AirPortFlightStatusForm from "../Widgets/Other/AirportFlightStatus/AirPortFlightStatusForm";
+import CountDownClockForm from "../Widgets/Clock/CountDownClock/CountDownClockForm";
+import MultiDayWeatherMain from "../Widgets/Weather/MultiDayWeather/MultiDayWeatherMain";
 
 
 
@@ -83,6 +85,8 @@ const renderDynamicContent = () => {
           return <AnalogSquareClockForm card={card} />;
         case "digital_clock_simple":
           return <DigitalClockSimpleForm card={card} />;
+        case "countdown_app":
+          return <CountDownClockForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
@@ -95,6 +99,8 @@ const renderDynamicContent = () => {
           return <ModernWeatherForecastTallandBarMain card={card} />;
         case "simple_weather_app":
           return <SimpleWeatherForm card={card} />;
+        case "multi_day_weather":
+          return <MultiDayWeatherMain card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
