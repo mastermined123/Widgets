@@ -43,6 +43,10 @@ import KlipfoloiForm from "../Widgets/ThirdParty/Klipfoloi/KlipfoloiForm";
 import StreamaForm from "../Widgets/ThirdParty/Streama/StreamaForm";
 import FlightStatusForm from "../Widgets/Other/FlightStatus/FlightStatusForm";
 import MatchScoreForm from "../Widgets/Sports/MatchScore/MatchScoreForm";
+import SoccerScoreForm from "../Widgets/Sports/SoccerScore/SoccerScoreForm";
+import SoccerTableFrom from "../Widgets/Sports/SoccerTable/SoccerTableForm";
+import SoccerLeaugueTableForm from "../Widgets/Sports/SoccerLeaugueTable/SoccerLeaugueTableForm";
+import AirPortFlightStatusForm from "../Widgets/Other/AirportFlightStatus/AirPortFlightStatusForm";
 
 
 
@@ -167,8 +171,8 @@ const renderDynamicContent = () => {
         case "flight_status":
           return <FlightStatusForm card={card} />;
         case "airport_flight_status":
-          return <FlightStatusForm card={card} />;
-          default:
+          return <AirPortFlightStatusForm card={card} />;
+        default:
           return <AmericanFootball card={card} />;
       }
 
@@ -288,7 +292,15 @@ const renderDynamicContent = () => {
       switch (card.cardType) {
         case "match_score_widget":
           return <MatchScoreForm card={card} />;
-        default:
+        case "match_scores_widget_ii":
+          return <MatchScoreForm isScoreWidgetTwo card={card} />;
+       case "soccer_scores":
+          return <SoccerScoreForm  card={card} />;
+      case "soccer_tables":
+          return <SoccerTableFrom  card={card} />;
+      case "soccer_league_table":
+          return <SoccerLeaugueTableForm  card={card} />;
+      default:
           return <AmericanFootball card={card} />;
         }
 

@@ -5,9 +5,9 @@ import MediaCards from './components/TopBar/MediaCard';
 import { Dialog } from "@mui/material";
 import { analog_round_clock ,clock_bar_classic, clock_bar_modern, countdown_app, digital_clock_simple, watch1,watch2,
   watch3, watch4, watch5, watch6, watch7, watch8, directory_list, rich_text_widget, seven_days_exchange_rate, currency_exchange_scroller,
-  exchange_rate, simple_weather_app, modern_weather_forecast, multi_city_weather, flight_status, airport_flight_status, audio_announcement_app
+  exchange_rate, simple_weather_app, modern_weather_forecast, multi_city_weather, flight_status, airport_flight_status, audio_announcement_app,
+  match_score_widget, soccer_league_table
 } from './constant/clockURL.js';
-
 
 
 const categories = [
@@ -1204,16 +1204,16 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Match scores widget",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
+      imageSrc: match_score_widget,
     },
     {
       id: 112,
-      cardType: "match_scores_widget",
+      cardType: "match_scores_widget_ii",
       title: "Match Scores Widget",
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Match Scores Widget",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUDew7q_xi957Tkd27alOeNj5dumIYXffnw&s",
     },
     {
       id: 113,
@@ -1222,16 +1222,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Soccer league table",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
-    },
-    {
-      id: 114,
-      cardType: "soccer_league_table_2",
-      title: "Soccer league table",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Soccer league table",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
+      imageSrc: soccer_league_table,
     },
     {
       id: 115,
@@ -1240,7 +1231,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Soccer Scores",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYgiD4LcoQDtctsYzTzBaP1anKo6hPRVK-ug&s",
     },
     {
       id: 116,
@@ -1249,8 +1240,18 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Soccer Tables",
-      imageSrc: "https://plus.unsplash.com/premium_photo-1720433273113-92b678394dd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fFNvY2NlciUyMGxlYWd1ZSUyMHRhYmxlfGVufDB8fDB8fHww",
+      imageSrc: "https://ninjatables.com/wp-content/uploads/2024/05/Soccer-League-Table-2-1.png",
     },
+    {
+      id: 114,
+      cardType: "soccer_league_table_2",
+      title: "Soccer league table",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Soccer league table",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2TgfjE6PG_PmdgWhP_B23fN7omJyA1uty7U1Bo6-nvExfTe4zyxZcmQqQwExv_c3jZs&usqp=CAU",
+    },
+
   ],
 }
 ,
