@@ -80,7 +80,7 @@ const styles = {
 image: {
   width: "100%",        
   height: "100px",      
-  objectFit: "cover",   
+  objectFit: "contain",   
   borderRadius: "4px"  
 }
 };
