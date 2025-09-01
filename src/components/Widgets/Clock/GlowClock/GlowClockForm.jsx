@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ClockBarModernPopUp from "./ClockBarModernPopUp";
+import GlowClockPopUp from "./GlowClockPopUp";
 
-function ClockBarModernForm({ card }) {
+function GlowClockForm({ card }) {
     const [activeTab, setActiveTab] = useState("settings");
 
     // Fields
@@ -9,13 +9,18 @@ function ClockBarModernForm({ card }) {
     const [tags, setTags] = useState([]);
     const [dataFeed, setDataFeed] = useState(""); // input for tags
 
+    const [timeOptions, setTimeOptions] = useState("HH/MM/SS"); // HH/MM/SS format
     const [timeFormat, setTimeFormat] = useState("AM/PM"); // AM/PM or 24h
+    const [backgroundCircleColor, setBackgroundCircleColor] = useState("#e1e2eb");
+    const [circleColor, setCircleColor] = useState("#e83e00");
+    const [fontColor, setFontColor] = useState("#333333");
     const [textFont, setTextFont] = useState(""); // font selection
-    const [fontColor, setFontColor] = useState("#202735");
-    const [dialColor, setDialColor] = useState("#14d5ef");
+    const [fontSize, setFontSize] = useState(""); // font size percentage
     const [backgroundColor, setBackgroundColor] = useState("#ffffff");
     const [backgroundImage, setBackgroundImage] = useState("");
-    const [disableRoundClock, setDisableRoundClock] = useState(false);
+    const [hideClock, setHideClock] = useState(false);
+    const [hideCircles, setHideCircles] = useState(false);
+    const [hideGlowing, setHideGlowing] = useState(false);
 
     const [showPopup, setShowPopup] = useState(false);
     const [appNameError, setAppNameError] = useState("");
@@ -45,13 +50,18 @@ function ClockBarModernForm({ card }) {
         console.log({
             appName,
             tags,
+            timeOptions,
             timeFormat,
-            textFont,
+            backgroundCircleColor,
+            circleColor,
             fontColor,
-            dialColor,
+            textFont,
+            fontSize,
             backgroundColor,
             backgroundImage,
-            disableRoundClock,
+            hideClock,
+            hideCircles,
+            hideGlowing,
         });
         alert("Saved! Check console.");
     };
@@ -60,9 +70,9 @@ function ClockBarModernForm({ card }) {
         <div style={styles.container}>
             {/* Left Portion */}
             <div style={styles.left}>
-                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Clock Bar Modern"}</label>
-                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Clock Bar Modern"} style={styles.image} />}
-                <p>Modern clock with customizable time format, fonts, colors, and background options.</p>
+                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Glow Clock"}</label>
+                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Glow Clock"} style={styles.image} />}
+                <p>Modern glowing clock with customizable time format, colors, and glow effects.</p>
             </div>
 
             {/* Right Portion */}
@@ -122,9 +132,23 @@ function ClockBarModernForm({ card }) {
                                 </div>
                             </div>
 
+                            {/* Time Options */}
+                            <div style={styles.field}>
+                                <label>Time Options</label>
+                                <select
+                                    value={timeOptions}
+                                    onChange={(e) => setTimeOptions(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="HH/MM/SS">HH/MM/SS</option>
+                                    <option value="HH/MM">HH/MM</option>
+                                    <option value="MM/SS">MM/SS</option>
+                                </select>
+                            </div>
+
                             {/* Time Format */}
                             <div style={styles.field}>
-                                <label>Time Format</label>
+                                <label>Time format</label>
                                 <select
                                     value={timeFormat}
                                     onChange={(e) => setTimeFormat(e.target.value)}
@@ -133,7 +157,60 @@ function ClockBarModernForm({ card }) {
                                     <option value="AM/PM">AM/PM</option>
                                     <option value="24h">24h</option>
                                 </select>
-                                <p style={styles.helpText}>Choose how you want to display the clock: AM/PM or 24h.</p>
+                            </div>
+
+                            {/* Background Circle Color */}
+                            <div style={styles.field}>
+                                <label>Background Circle Color <span style={styles.optional}>(optional)</span></label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={backgroundCircleColor}
+                                        onChange={(e) => setBackgroundCircleColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#e1e2eb" />
+                                    <input
+                                        type="color"
+                                        value={backgroundCircleColor}
+                                        onChange={(e) => setBackgroundCircleColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                            </div>
+
+                            {/* Circle Color */}
+                            <div style={styles.field}>
+                                <label>Circle Color <span style={styles.optional}>(optional)</span></label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={circleColor}
+                                        onChange={(e) => setCircleColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#e83e00" />
+                                    <input
+                                        type="color"
+                                        value={circleColor}
+                                        onChange={(e) => setCircleColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                            </div>
+
+                            {/* Font Color */}
+                            <div style={styles.field}>
+                                <label>Font Color <span style={styles.optional}>(optional)</span></label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#333333" />
+                                    <input
+                                        type="color"
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
                             </div>
 
                             {/* Text Font */}
@@ -157,42 +234,17 @@ function ClockBarModernForm({ card }) {
                                 <p style={styles.helpText}>Change the font used to show the text.</p>
                             </div>
 
-                            {/* Font Color */}
+                            {/* Font Size */}
                             <div style={styles.field}>
-                                <label>Font Color <span style={styles.optional}>(optional)</span></label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={fontColor}
-                                        onChange={(e) => setFontColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#202735" />
-                                    <input
-                                        type="color"
-                                        value={fontColor}
-                                        onChange={(e) => setFontColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                                <p style={styles.helpText}>Change the font color.</p>
-                            </div>
-
-                            {/* Dial Color */}
-                            <div style={styles.field}>
-                                <label>Dial Color <span style={styles.optional}>(optional)</span></label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={dialColor}
-                                        onChange={(e) => setDialColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#14d5ef" />
-                                    <input
-                                        type="color"
-                                        value={dialColor}
-                                        onChange={(e) => setDialColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                                <p style={styles.helpText}>Change the dial clock color.</p>
+                                <label>Font Size <span style={styles.optional}>(optional)</span></label>
+                                <input
+                                    type="text"
+                                    value={fontSize}
+                                    onChange={(e) => setFontSize(e.target.value)}
+                                    style={styles.input}
+                                    placeholder="In percentage. Empty is considered 100%."
+                                />
+                                <p style={styles.helpText}>In percentage. Empty is considered 100%.</p>
                             </div>
 
                             {/* Background Color */}
@@ -207,7 +259,6 @@ function ClockBarModernForm({ card }) {
                                         placeholder="#ffffff" />
                                     <div style={styles.transparentPattern}></div>
                                 </div>
-                                <p style={styles.helpText}>Change the background color.</p>
                             </div>
 
                             {/* Background Image */}
@@ -216,20 +267,48 @@ function ClockBarModernForm({ card }) {
                                 <div style={styles.imageUploadContainer}>
                                     <button style={styles.chooseButton}>Choose</button>
                                 </div>
+                                <p style={styles.helpText}>You may need to adjust the background color transparency to see the image.</p>
                                 <p style={styles.helpText}>The background image will stretch to fill the app height and width.</p>
                             </div>
 
-                            {/* Disable Round Clock */}
+                            {/* Hide Clock */}
                             <div style={styles.field}>
                                 <label style={styles.checkboxContainer}>
                                     <input
                                         type="checkbox"
-                                        checked={disableRoundClock}
-                                        onChange={(e) => setDisableRoundClock(e.target.checked)}
+                                        checked={hideClock}
+                                        onChange={(e) => setHideClock(e.target.checked)}
                                         style={styles.checkbox}
                                     />
-                                    Disable Round Clock
+                                    Hide Clock
                                 </label>
+                            </div>
+
+                            {/* Hide Circles */}
+                            <div style={styles.field}>
+                                <label style={styles.checkboxContainer}>
+                                    <input
+                                        type="checkbox"
+                                        checked={hideCircles}
+                                        onChange={(e) => setHideCircles(e.target.checked)}
+                                        style={styles.checkbox}
+                                    />
+                                    Hide Circles
+                                </label>
+                            </div>
+
+                            {/* Hide Glowing */}
+                            <div style={styles.field}>
+                                <label style={styles.checkboxContainer}>
+                                    <input
+                                        type="checkbox"
+                                        checked={hideGlowing}
+                                        onChange={(e) => setHideGlowing(e.target.checked)}
+                                        style={styles.checkbox}
+                                    />
+                                    Hide Glowing
+                                </label>
+                                <p style={styles.helpText}>Glow may affect player's performance</p>
                             </div>
                         </div>
                     )}
@@ -243,17 +322,22 @@ function ClockBarModernForm({ card }) {
 
                 {/* Preview Popup */}
                 {showPopup && (
-                    <ClockBarModernPopUp
+                    <GlowClockPopUp
                         onClose={() => setShowPopup(false)}
                         appName={appName}
                         tags={tags}
+                        timeOptions={timeOptions}
                         timeFormat={timeFormat}
-                        textFont={textFont}
+                        backgroundCircleColor={backgroundCircleColor}
+                        circleColor={circleColor}
                         fontColor={fontColor}
-                        dialColor={dialColor}
+                        textFont={textFont}
+                        fontSize={fontSize}
                         backgroundColor={backgroundColor}
                         backgroundImage={backgroundImage}
-                        disableRoundClock={disableRoundClock}
+                        hideClock={hideClock}
+                        hideCircles={hideCircles}
+                        hideGlowing={hideGlowing}
                     />
                 )}
             </div>
@@ -462,4 +546,4 @@ const styles = {
     },
 };
 
-export default ClockBarModernForm;
+export default GlowClockForm;

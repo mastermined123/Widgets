@@ -51,7 +51,8 @@ import CountDownClockForm from "../Widgets/Clock/CountDownClock/CountDownClockFo
 import MultiDayWeatherMain from "../Widgets/Weather/MultiDayWeather/MultiDayWeatherMain";
 import HolidayClockForm from "../Widgets/Clock/HolidayClock/HolidayClockForm";
 import LcdClockForm from "../Widgets/Clock/LCD_Clock/LCD_CLock_Form";
-
+import ClockBarModernForm from "../Widgets/Clock/ClockBarModern/ClockBarModernForm";
+import GlowClockForm from "../Widgets/Clock/GlowClock/GlowClockForm";
 
 
 
@@ -92,7 +93,11 @@ const renderDynamicContent = () => {
          case "holiday_clock":
           return <HolidayClockForm card={card} />;
         case "lcd_clock" :
-          return <LcdClockForm card={card} />;          
+          return <LcdClockForm card={card} />;   
+        case "clock_bar_modern":
+            return <ClockBarModernForm card={card} />;
+        case "glow_clock":
+            return <GlowClockForm card={card} />;       
         default:
           return <AmericanFootball card={card} />;
       }
