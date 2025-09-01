@@ -89,7 +89,7 @@ const renderDynamicContent = () => {
         case "digital_clock_simple":
           return <DigitalClockSimpleForm card={card} />;
         case "countdown_app":
-          return <CountDownClockForm card={card} />;
+           return <CountDownClockForm card={card} />;
          case "holiday_clock":
           return <HolidayClockForm card={card} />;
         case "lcd_clock" :
