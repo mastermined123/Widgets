@@ -41,6 +41,8 @@ const CommonCard = ({
 const styles = {
   card: {
     cursor:'pointer',
+    width: "203px",      // ✅ fixed width
+  height: "160px",  
 
     // border: "1px solid #ddd",
     // borderRadius: "8px",
@@ -77,11 +79,12 @@ const styles = {
     fontSize: "10px",
     textAlign:'center',
   },
+  
 image: {
   width: "100%",        
   height: "100px",      
   objectFit: "contain",   
-  borderRadius: "4px"  
+    // borderRadius: "4px"  
 }
 };
 

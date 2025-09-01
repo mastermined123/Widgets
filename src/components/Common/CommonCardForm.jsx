@@ -50,6 +50,7 @@ import AirPortFlightStatusForm from "../Widgets/Other/AirportFlightStatus/AirPor
 import CountDownClockForm from "../Widgets/Clock/CountDownClock/CountDownClockForm";
 import MultiDayWeatherMain from "../Widgets/Weather/MultiDayWeather/MultiDayWeatherMain";
 import HolidayClockForm from "../Widgets/Clock/HolidayClock/HolidayClockForm";
+import LcdClockForm from "../Widgets/Clock/LCD_Clock/LCD_CLock_Form";
 
 
 
@@ -90,6 +91,8 @@ const renderDynamicContent = () => {
           return <CountDownClockForm card={card} />;
          case "holiday_clock":
           return <HolidayClockForm card={card} />;
+        case "lcd_clock" :
+          return <LcdClockForm card={card} />;          
         default:
           return <AmericanFootball card={card} />;
       }
