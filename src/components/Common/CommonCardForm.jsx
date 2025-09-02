@@ -53,6 +53,7 @@ import HolidayClockForm from "../Widgets/Clock/HolidayClock/HolidayClockForm";
 import LcdClockForm from "../Widgets/Clock/LCD_Clock/LCD_CLock_Form";
 import ClockBarModernForm from "../Widgets/Clock/ClockBarModern/ClockBarModernForm";
 import GlowClockForm from "../Widgets/Clock/GlowClock/GlowClockForm";
+import RoundModernClockForm from "../Widgets/Clock/RoundModernClock/RoundModernClockForm";
 
 
 
@@ -97,7 +98,9 @@ const renderDynamicContent = () => {
         case "clock_bar_modern":
             return <ClockBarModernForm card={card} />;
         case "glow_clock":
-            return <GlowClockForm card={card} />;       
+            return <GlowClockForm card={card} />;   
+        // case "round_clock_modern":
+        //       return <RoundModernClockForm card={card} />;    
         default:
           return <AmericanFootball card={card} />;
       }
