@@ -62,6 +62,7 @@ import MultiCityClockForm from "../Widgets/Clock/MultiCityClock/MultiCityClockFo
 import WeatherAndClockForm from "../Widgets/Clock/Weather_And_Clock/WeatherAndClockForm";
 import ClockBarClassicForm from "../Widgets/Clock/ClockBarClassic/ClockBarClassicForm";
 import TimeElapsedForm from "../Widgets/Clock/TimeElapsedClock/TimeElapsedForm";
+import TimeAppForm from "../Widgets/Clock/TimeApp/TimeAppForm"; 
 
 
 
@@ -125,8 +126,8 @@ const renderDynamicContent = () => {
           return <ClockBarClassicForm card={card} />
         case "time_elapsed":
           return <TimeElapsedForm card={card} />
-          //  case "time_app":
-      //        return <TimeAppForm card={card} />;
+        case "time_app":
+          return <TimeAppForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
