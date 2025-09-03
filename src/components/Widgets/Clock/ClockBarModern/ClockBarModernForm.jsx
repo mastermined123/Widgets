@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import ClockBarModernPopUp from "./ClockBarModernPopUp";
 
@@ -291,7 +292,7 @@ const styles = {
     image: {
         width: "100%",
         height: "200px",
-        objectFit: "cover",
+        objectFit: "contain",
         borderRadius: "8px",
         marginBottom: "10px",
     },
@@ -302,6 +303,7 @@ const styles = {
         backgroundColor: "#eee",
         border: "none",
         borderRadius: "4px",
+
     },
     activeTab: {
         padding: "5px 15px",

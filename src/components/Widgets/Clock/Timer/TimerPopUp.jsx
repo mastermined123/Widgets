@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 function TimerPopUp({
@@ -275,7 +276,7 @@ function TimerPopUp({
                 </div>
 
                 {/* Tags Display */}
-                {tags?.length > 0 && (
+                {/* {tags?.length > 0 && (
                     <div style={styles.tagsContainer}>
                         {tags.map((tag, i) => (
                             <span key={i} style={{
@@ -286,7 +287,7 @@ function TimerPopUp({
                             </span>
                         ))}
                     </div>
-                )}
+                )} */}
 
                 {/* CSS Animations */}
                 <style jsx>{`

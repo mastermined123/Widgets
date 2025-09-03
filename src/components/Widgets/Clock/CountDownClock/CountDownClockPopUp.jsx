@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 function CountDownClockPopUp({ 
@@ -261,7 +262,6 @@ const styles = {
         zIndex: 1000,
     },
     popup: {
-        backgroundColor: "transparent",
         width: "100%",
         height: "100%",
         overflow: "hidden",

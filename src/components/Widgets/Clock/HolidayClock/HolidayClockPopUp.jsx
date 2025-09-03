@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 function HolidayClockPopUp({ 
@@ -119,10 +120,6 @@ function HolidayClockPopUp({
         <div style={styles.overlay} onClick={onClose}>
             <div style={{
                 ...styles.popup,
-                width: "1200px",
-                maxWidth: "95vw",
-                height: "800px",
-                maxHeight: "95vh",
             }} onClick={(e) => e.stopPropagation()}>
                 {/* Close Button */}
                 <button onClick={onClose} style={{
@@ -229,14 +226,9 @@ const styles = {
         zIndex: 1000,
     },
     popup: {
-        backgroundColor: "transparent",
-        borderRadius: "12px",
-        width: "1000px",
-        maxWidth: "95vw",
-        height: "1200px",
-        maxHeight: "95vh",
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
-        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
         position: "relative",
     },
     closeButton: {

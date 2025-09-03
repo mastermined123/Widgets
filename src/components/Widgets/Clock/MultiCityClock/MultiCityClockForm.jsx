@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import AnalogSquareClockPopUp from "./AnalogSquareClockPopUp";
+import MultiCityClockPopUp from "./MultiCityClockPopUp";
 
-function AnalogSquareClockForm({ card }) {
+function MultiCityClockForm({ card }) {
     const [activeTab, setActiveTab] = useState("settings");
 
     // Fields
@@ -9,14 +9,55 @@ function AnalogSquareClockForm({ card }) {
     const [tags, setTags] = useState([]);
     const [dataFeed, setDataFeed] = useState(""); // input for tags
 
-    const [dialType, setDialType] = useState(""); // Arabic Numerials Dial / Roman Numerials Dial / Strokes Dial
-    const [dialBgColor, setDialBgColor] = useState("#ffffff");
+    // Updated fields
+    const [fontColor, setFontColor] = useState("#000000");
     const [handsColor, setHandsColor] = useState("#000000");
-    const [dialColor, setDialColor] = useState("#000000");
     const [bgColor, setBgColor] = useState("#f5f5f5");
+    
+    // Timezone fields
+    const [firstTimezone, setFirstTimezone] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [secondTimezone, setSecondTimezone] = useState("");
+    const [secondName, setSecondName] = useState("");
+    const [thirdTimezone, setThirdTimezone] = useState("");
+    const [thirdName, setThirdName] = useState("");
 
     const [showPopup, setShowPopup] = useState(false);
     const [appNameError, setAppNameError] = useState("");
+
+    // Static dummy list of cities with timezones
+    const cityTimezones = [
+        { city: "New York", timezone: "America/New_York" },
+        { city: "Los Angeles", timezone: "America/Los_Angeles" },
+        { city: "London", timezone: "Europe/London" },
+        { city: "Paris", timezone: "Europe/Paris" },
+        { city: "Tokyo", timezone: "Asia/Tokyo" },
+        { city: "Sydney", timezone: "Australia/Sydney" },
+        { city: "Dubai", timezone: "Asia/Dubai" },
+        { city: "Singapore", timezone: "Asia/Singapore" },
+        { city: "Hong Kong", timezone: "Asia/Hong_Kong" },
+        { city: "Mumbai", timezone: "Asia/Kolkata" },
+        { city: "Berlin", timezone: "Europe/Berlin" },
+        { city: "Rome", timezone: "Europe/Rome" },
+        { city: "Moscow", timezone: "Europe/Moscow" },
+        { city: "Cairo", timezone: "Africa/Cairo" },
+        { city: "Lagos", timezone: "Africa/Lagos" },
+        { city: "São Paulo", timezone: "America/Sao_Paulo" },
+        { city: "Mexico City", timezone: "America/Mexico_City" },
+        { city: "Toronto", timezone: "America/Toronto" },
+        { city: "Vancouver", timezone: "America/Vancouver" },
+        { city: "Bangkok", timezone: "Asia/Bangkok" },
+        { city: "Seoul", timezone: "Asia/Seoul" },
+        { city: "Beijing", timezone: "Asia/Shanghai" },
+        { city: "Shanghai", timezone: "Asia/Shanghai" },
+        { city: "Karachi", timezone: "Asia/Karachi" },
+        { city: "Lahore", timezone: "Asia/Karachi" },
+        { city: "Istanbul", timezone: "Europe/Istanbul" },
+        { city: "Athens", timezone: "Europe/Athens" },
+        { city: "Vienna", timezone: "Europe/Vienna" },
+        { city: "Amsterdam", timezone: "Europe/Amsterdam" },
+        { city: "Stockholm", timezone: "Europe/Stockholm" }
+    ];
 
     // Tag handlers
     const addTag = () => {
@@ -43,11 +84,15 @@ function AnalogSquareClockForm({ card }) {
         console.log({
             appName,
             tags,
-            dialType,
-            dialBgColor,
+            fontColor,
             handsColor,
-            dialColor,
             bgColor,
+            firstTimezone,
+            firstName,
+            secondTimezone,
+            secondName,
+            thirdTimezone,
+            thirdName
         });
         alert("Saved! Check console.");
     };
@@ -56,9 +101,14 @@ function AnalogSquareClockForm({ card }) {
         <div style={styles.container}>
             {/* Left Portion */}
             <div style={styles.left}>
-                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Analog Square Clock"}</label>
-                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Analog Square Clock"} style={styles.image} />}
-                <p>Configurable analog square clock: dial type, colors, and tags.</p>
+                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Multi City Clock"}</label>
+                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Multi City Clock"} style={styles.image} />}
+                <p>Display time from multiple cities around the world with customizable colors and fonts.</p>
+                <p>Better Viewed Like This:</p>
+                <div style={styles.previewBoxes}>
+                    <div style={{ ...styles.box, width: "100px", height: "60px" }}></div>
+                    <div style={{ ...styles.box, width: "60px", height: "100px" }}></div>
+                </div>
             </div>
 
             {/* Right Portion */}
@@ -97,9 +147,9 @@ function AnalogSquareClockForm({ card }) {
                                 )}
                             </div>
 
-                            {/* Tags (multiple) */}
+                            {/* Tags (optional) */}
                             <div style={styles.field}>
-                                <label>Tags (multiple):</label>
+                                <label>Tags (optional):</label>
                                 <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
                                     {tags?.map((tag, i) => (
                                         <span key={i} style={styles.tag}>
@@ -111,46 +161,31 @@ function AnalogSquareClockForm({ card }) {
                                         type="text"
                                         value={dataFeed}
                                         onChange={(e) => setDataFeed(e.target.value)}
-                                        placeholder="Enter a tag and press Enter"
+                                        placeholder="Enter tag"
                                         style={{ ...styles.input, flex: "1" }}
                                         onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag())} />
                                 </div>
                             </div>
 
-                            {/* Dial Type */}
+                            {/* Font Color */}
                             <div style={styles.field}>
-                                <label>Dial Type:</label>
-                                <select
-                                    value={dialType}
-                                    onChange={(e) => setDialType(e.target.value)}
-                                    style={styles.input}
-                                >
-                                    <option value="">Select Dial Type</option>
-                                    <option value="Arabic Numerials Dial">Arabic Numerials Dial</option>
-                                    <option value="Roman Numerials Dial">Roman Numerials Dial</option>
-                                    <option value="Strokes Dial">Strokes Dial</option>
-                                </select>
-                            </div>
-
-                            {/* Dial Background Color */}
-                            <div style={styles.field}>
-                                <label>Dial Background Color:</label>
+                                <label>Font Color:</label>
                                 <div style={styles.colorInputContainer}>
                                     <input
                                         type="text"
-                                        value={dialBgColor}
-                                        onChange={(e) => setDialBgColor(e.target.value)}
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
                                         style={styles.colorTextInput}
-                                        placeholder="#ffffff" />
+                                        placeholder="#000000" />
                                     <input
                                         type="color"
-                                        value={dialBgColor}
-                                        onChange={(e) => setDialBgColor(e.target.value)}
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
                                         style={styles.colorPicker} />
                                 </div>
                             </div>
 
-                            {/* Hands and Dial color */}
+                            {/* Hands and Dial Color */}
                             <div style={styles.field}>
                                 <label>Hands and dial color:</label>
                                 <div style={styles.colorInputContainer}>
@@ -164,23 +199,6 @@ function AnalogSquareClockForm({ card }) {
                                         type="color"
                                         value={handsColor}
                                         onChange={(e) => setHandsColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                            </div>
-
-                            <div style={styles.field}>
-                                <label>Dial Color:</label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={dialColor}
-                                        onChange={(e) => setDialColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#000000" />
-                                    <input
-                                        type="color"
-                                        value={dialColor}
-                                        onChange={(e) => setDialColor(e.target.value)}
                                         style={styles.colorPicker} />
                                 </div>
                             </div>
@@ -202,6 +220,93 @@ function AnalogSquareClockForm({ card }) {
                                         style={styles.colorPicker} />
                                 </div>
                             </div>
+
+                            {/* First Timezone City */}
+                            <div style={styles.field}>
+                                <label>First timezone City:</label>
+                                <select
+                                    value={firstTimezone}
+                                    onChange={(e) => setFirstTimezone(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="">Select City</option>
+                                    {cityTimezones.map((item, index) => (
+                                        <option key={index} value={item.timezone}>
+                                            {item.city}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* First City Name */}
+                            <div style={styles.field}>
+                                <label>City name:</label>
+                                <input
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    style={styles.input}
+                                    placeholder="Enter custom city name"
+                                />
+                            </div>
+
+                            {/* Second Timezone City */}
+                            <div style={styles.field}>
+                                <label>Second timezone City:</label>
+                                <select
+                                    value={secondTimezone}
+                                    onChange={(e) => setSecondTimezone(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="">Select City</option>
+                                    {cityTimezones.map((item, index) => (
+                                        <option key={index} value={item.timezone}>
+                                            {item.city}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Second City Name */}
+                            <div style={styles.field}>
+                                <label>City name:</label>
+                                <input
+                                    type="text"
+                                    value={secondName}
+                                    onChange={(e) => setSecondName(e.target.value)}
+                                    style={styles.input}
+                                    placeholder="Enter custom city name"
+                                />
+                            </div>
+
+                            {/* Third Timezone City */}
+                            <div style={styles.field}>
+                                <label>Third timezone City:</label>
+                                <select
+                                    value={thirdTimezone}
+                                    onChange={(e) => setThirdTimezone(e.target.value)}
+                                    style={styles.input}
+                                >
+                                    <option value="">Select City</option>
+                                    {cityTimezones.map((item, index) => (
+                                        <option key={index} value={item.timezone}>
+                                            {item.city}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Third City Name */}
+                            <div style={styles.field}>
+                                <label>City name:</label>
+                                <input
+                                    type="text"
+                                    value={thirdName}
+                                    onChange={(e) => setThirdName(e.target.value)}
+                                    style={styles.input}
+                                    placeholder="Enter custom city name"
+                                />
+                            </div>
                         </div>
                     )}
                 </div>
@@ -214,15 +319,20 @@ function AnalogSquareClockForm({ card }) {
 
                 {/* Preview Popup */}
                 {showPopup && (
-                    <AnalogSquareClockPopUp
+                    <MultiCityClockPopUp
                         onClose={() => setShowPopup(false)}
                         appName={appName}
                         tags={tags}
-                        dialType={dialType}
-                        dialBgColor={dialBgColor}
+                        fontColor={fontColor}
                         handsColor={handsColor}
-                        dialColor={dialColor}
-                        bgColor={bgColor} />
+                        bgColor={bgColor}
+                        firstTimezone={firstTimezone}
+                        firstName={firstName}
+                        secondTimezone={secondTimezone}
+                        secondName={secondName}
+                        thirdTimezone={thirdTimezone}
+                        thirdName={thirdName}
+                    />
                 )}
             </div>
         </div>
@@ -262,6 +372,8 @@ const styles = {
     borderRadius: "8px",
     marginBottom: "10px",
   },
+  previewBoxes: { display: "flex", gap: "10px", marginTop: "10px", marginBottom: "20px" },
+  box: { backgroundColor: "#ddd", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "4px" },
   tabs: { display: "flex", gap: "10px", marginBottom: "15px" },
   tab: {
     padding: "5px 15px",
@@ -278,9 +390,9 @@ const styles = {
     border: "none",
     borderRadius: "4px",
   },
-  tabContent: { flex: 1, overflowY: "auto" },
+  tabContent: { flex: 1, overflowY: "auto", paddingBottom: "80px" },
   field: { display: "flex", flexDirection: "column", marginBottom: "10px" },
-  input: { padding: "5px", borderRadius: "4px", border: "1px solid #ccc" },
+  input: { padding: "5px", borderRadius: "4px", border: "1px solid #ccc", marginTop: "2px" },
   bottomButtons: {
     display: "flex",
     justifyContent: "flex-end",
@@ -291,7 +403,7 @@ const styles = {
   },
   saveBtn: {
     padding: "8px 16px",
-    backgroundColor: "#ff8c00",
+    backgroundColor: "#005481",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -300,7 +412,7 @@ const styles = {
   },
   previewBtn: {
     padding: "8px 16px",
-    backgroundColor: "#007acc",
+    backgroundColor: "#888",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -364,4 +476,4 @@ const styles = {
   },
 };
 
-export default AnalogSquareClockForm;
+export default MultiCityClockForm;

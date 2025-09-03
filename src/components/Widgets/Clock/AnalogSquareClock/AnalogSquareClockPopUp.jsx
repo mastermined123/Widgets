@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
@@ -137,13 +138,13 @@ const AnalogSquareClockPopUp = ({
           </div>
 
           {/* Tags (below clock) */}
-          {tags?.length > 0 && (
+          {/* {tags?.length > 0 && (
             <div style={{ marginTop: "15px", display: "flex", gap: "6px", flexWrap: "wrap" }}>
               {tags.map((tag, i) => (
                 <span key={i} style={styles.tag}>{tag}</span>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
@@ -164,14 +165,12 @@ const styles = {
     zIndex: 2000,
   },
   popup: {
-    borderRadius: "8px",
     boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
-    width: "900px",
-    height: "550px",
-    padding: "30px",
+    width: "100%",
+    height: "100%",
     position: "relative",
   },
   closeBtn: {
