@@ -373,7 +373,7 @@ const styles = {
     image: {
         width: "100%",
         height: "200px",
-        objectFit: "cover",
+        objectFit: "contain",
         borderRadius: "8px",
         marginBottom: "10px",
     },

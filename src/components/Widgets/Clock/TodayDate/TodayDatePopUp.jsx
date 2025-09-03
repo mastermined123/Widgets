@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 function TodayDatePopUp({
@@ -109,7 +110,7 @@ function TodayDatePopUp({
                 </div>
 
                 {/* Tags Display */}
-                {tags?.length > 0 && (
+                {/* {tags?.length > 0 && (
                     <div style={styles.tagsContainer}>
                         {tags.map((tag, i) => (
                             <span key={i} style={styles.tag}>
@@ -117,7 +118,7 @@ function TodayDatePopUp({
                             </span>
                         ))}
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );

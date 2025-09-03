@@ -57,6 +57,11 @@ import RoundModernClockForm from "../Widgets/Clock/RoundModernClock/RoundModernC
 import TodayDateForm from "../Widgets/Clock/TodayDate/TodayDateForm";
 // import TimeAppForm from "../Widgets/Clock/TimeApp/TimeAppForm";
 import TimerForm from "../Widgets/Clock/Timer/TimerForm";
+import EventCountDownForm from "../Widgets/Clock/EventCountDownClock/EventCountDownForm";
+import MultiCityClockForm from "../Widgets/Clock/MultiCityClock/MultiCityClockForm";
+import WeatherAndClockForm from "../Widgets/Clock/Weather_And_Clock/WeatherAndClockForm";
+import ClockBarClassicForm from "../Widgets/Clock/ClockBarClassic/ClockBarClassicForm";
+import TimeElapsedForm from "../Widgets/Clock/TimeElapsedClock/TimeElapsedForm";
 
 
 
@@ -108,7 +113,19 @@ const renderDynamicContent = () => {
               return <TodayDateForm card={card} />;  
         case "timer":
               return <TimerForm card={card} />; 
-      //  case "time_app":
+        case "event_countdown":
+          return <EventCountDownForm card={card} />
+        case "multi_city_clock":
+          return <MultiCityClockForm card={card} />
+        case "multi_city_clock_ii":
+          return <MultiCityClockForm card={card} />
+        case "weather_clock":
+          return <WeatherAndClockForm card={card} />
+        case "clock_bar_classic":
+          return <ClockBarClassicForm card={card} />
+        case "time_elapsed":
+          return <TimeElapsedForm card={card} />
+          //  case "time_app":
       //        return <TimeAppForm card={card} />;
         default:
           return <AmericanFootball card={card} />;

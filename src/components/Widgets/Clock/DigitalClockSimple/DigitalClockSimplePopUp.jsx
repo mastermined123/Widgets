@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
@@ -135,14 +136,11 @@ const styles = {
     zIndex: 2000,
   },
   popup: {
-    borderRadius: "8px",
-    boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
-    width: "900px",
-    height: "550px",
-    padding: "30px",
+    width: "100%",
+    height: "100%",
     position: "relative",
   },
   closeBtn: {

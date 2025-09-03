@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 function ClockBarModernPopUp({ 
@@ -224,21 +225,15 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         zIndex: 1000,
     },
     popup: {
-        backgroundColor: "transparent",
-        borderRadius: "12px",
-        width: "1000px",
-        maxWidth: "95vw",
-        height: "700px",
-        maxHeight: "95vh",
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
-        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
         position: "relative",
     },
     closeButton: {

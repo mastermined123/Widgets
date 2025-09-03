@@ -1,26 +1,47 @@
 import React, { useState } from "react";
-import DigitalClockSimplePopUp from "./DigitalClockSimplePopUp";
+import ClockBarClassicPopUp from "./ClockBarClassicPopUp";
 
-function DigitalClockSimpleForm({ card }) {
+function ClockBarClassicForm({ card }) {
     const [activeTab, setActiveTab] = useState("settings");
 
     // Fields
     const [appName, setAppName] = useState("");
     const [tags, setTags] = useState([]);
     const [dataFeed, setDataFeed] = useState(""); // input for tags
-
-    const [centralBgColor, setCentralBgColor] = useState("#cad4de");
-    const [borderBgColor, setBorderBgColor] = useState("#0f0f0f");
-    const [textFont, setTextFont] = useState("Roboto Condensed Italic");
-    const [fontColor, setFontColor] = useState("#ffffff");
+    const [theme, setTheme] = useState("Royal Blue");
     const [timeFormat, setTimeFormat] = useState("AM/PM");
-    const [disableDate, setDisableDate] = useState(false);
-    const [disableAnimation, setDisableAnimation] = useState(false);
-    const [disableLeadingZero, setDisableLeadingZero] = useState(false);
+    const [textFont, setTextFont] = useState("");
+    const [fontColor, setFontColor] = useState("#000000");
+    const [containerColor, setContainerColor] = useState("#ffffff");
+    const [bgColor, setBgColor] = useState("#f5f5f5");
+    const [bgImage, setBgImage] = useState("");
     const [selectedLanguage, setSelectedLanguage] = useState("en-US");
 
     const [showPopup, setShowPopup] = useState(false);
     const [appNameError, setAppNameError] = useState("");
+
+    // Theme options
+    const themeOptions = [
+        "Royal Blue",
+        "Navy",
+        "Dark Cyan",
+        "Lime Green",
+        "Wheat",
+        "Red Velvet",
+        "Forest Green"
+    ];
+
+    // Font options
+    const fontOptions = [
+        "Arial",
+        "Times New Roman",
+        "Helvetica",
+        "Georgia",
+        "Verdana",
+        "Courier New",
+        "Roboto",
+        "Open Sans"
+    ];
 
     // Tag handlers
     const addTag = () => {
@@ -47,15 +68,14 @@ function DigitalClockSimpleForm({ card }) {
         console.log({
             appName,
             tags,
-            centralBgColor,
-            borderBgColor,
+            theme,
+            timeFormat,
             textFont,
             fontColor,
-            timeFormat,
-            disableDate,
-            disableAnimation,
-            disableLeadingZero,
-            selectedLanguage,
+            containerColor,
+            bgColor,
+            bgImage,
+            selectedLanguage
         });
         alert("Saved! Check console.");
     };
@@ -64,9 +84,9 @@ function DigitalClockSimpleForm({ card }) {
         <div style={styles.container}>
             {/* Left Portion */}
             <div style={styles.left}>
-                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Digital Clock Simple"}</label>
-                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Digital Clock Simple"} style={styles.image} />}
-                <p>Configurable digital clock with customizable colors, fonts, and time formats.</p>
+                <label style={{ ...styles.field, fontWeight: "bold" }}>{card?.title || "Clock Bar Classic"}</label>
+                {card?.imageSrc && <img src={card.imageSrc} alt={card?.title || "Clock Bar Classic"} style={styles.image} />}
+                <p>Configurable clock bar with theme options and customizable appearance.</p>
             </div>
 
             {/* Right Portion */}
@@ -131,78 +151,18 @@ function DigitalClockSimpleForm({ card }) {
                                 </div>
                             </div>
 
-                            {/* Central Background Color */}
+                            {/* Theme */}
                             <div style={styles.field}>
-                                <label>Central Background Color <span style={styles.optional}>(optional)</span>:</label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={centralBgColor}
-                                        onChange={(e) => setCentralBgColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#cad4de" />
-                                    <input
-                                        type="color"
-                                        value={centralBgColor}
-                                        onChange={(e) => setCentralBgColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                                <small style={styles.helpText}>Change the background color gradient.</small>
-                            </div>
-
-                            {/* Border Background Color */}
-                            <div style={styles.field}>
-                                <label>Border Background Color <span style={styles.optional}>(optional)</span>:</label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={borderBgColor}
-                                        onChange={(e) => setBorderBgColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#0f0f0f" />
-                                    <input
-                                        type="color"
-                                        value={borderBgColor}
-                                        onChange={(e) => setBorderBgColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                                <small style={styles.helpText}>Change the background color gradient.</small>
-                            </div>
-
-                            {/* Text Font */}
-                            <div style={styles.field}>
-                                <label>Text Font <span style={styles.optional}>(optional)</span>:</label>
+                                <label>Theme:</label>
                                 <select
-                                    value={textFont}
-                                    onChange={(e) => setTextFont(e.target.value)}
+                                    value={theme}
+                                    onChange={(e) => setTheme(e.target.value)}
                                     style={styles.select}
                                 >
-                                    <option value="Roboto Condensed Italic">AaBbCcDdEeFfGgHhIiJjKk1234567B</option>
-                                    <option value="Arial">Arial</option>
-                                    <option value="Times New Roman">Times New Roman</option>
-                                    <option value="Helvetica">Helvetica</option>
-                                    <option value="Georgia">Georgia</option>
+                                    {themeOptions.map((option, index) => (
+                                        <option key={index} value={option}>{option}</option>
+                                    ))}
                                 </select>
-                                <small style={styles.helpText}>Change the font used to show the text.</small>
-                            </div>
-
-                            {/* Font Color */}
-                            <div style={styles.field}>
-                                <label>Font Color <span style={styles.optional}>(optional)</span>:</label>
-                                <div style={styles.colorInputContainer}>
-                                    <input
-                                        type="text"
-                                        value={fontColor}
-                                        onChange={(e) => setFontColor(e.target.value)}
-                                        style={styles.colorTextInput}
-                                        placeholder="#ffffff" />
-                                    <input
-                                        type="color"
-                                        value={fontColor}
-                                        onChange={(e) => setFontColor(e.target.value)}
-                                        style={styles.colorPicker} />
-                                </div>
-                                <small style={styles.helpText}>Change the font color.</small>
                             </div>
 
                             {/* Time Format */}
@@ -218,42 +178,104 @@ function DigitalClockSimpleForm({ card }) {
                                 </select>
                             </div>
 
-                            {/* Checkboxes */}
-                            <div style={styles.checkboxGroup}>
-                                <label style={styles.checkboxLabel}>
+                            {/* Text Font (optional) */}
+                            <div style={styles.field}>
+                                <label>Text Font <span style={styles.optional}>(optional)</span>:</label>
+                                <select
+                                    value={textFont}
+                                    onChange={(e) => setTextFont(e.target.value)}
+                                    style={styles.select}
+                                >
+                                    <option value="">Select Font</option>
+                                    {fontOptions.map((font, index) => (
+                                        <option key={index} value={font}>{font}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Font Color (optional) */}
+                            <div style={styles.field}>
+                                <label>Font Color <span style={styles.optional}>(optional)</span>:</label>
+                                <div style={styles.colorInputContainer}>
                                     <input
-                                        type="checkbox"
-                                        checked={disableDate}
-                                        onChange={(e) => setDisableDate(e.target.checked)}
-                                        style={styles.checkbox}
-                                    />
-                                    Disable Date
-                                </label>
-                                <label style={styles.checkboxLabel}>
+                                        type="text"
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#000000" />
                                     <input
-                                        type="checkbox"
-                                        checked={disableAnimation}
-                                        onChange={(e) => setDisableAnimation(e.target.checked)}
-                                        style={styles.checkbox}
-                                    />
-                                    Disable Animation
-                                </label>
-                                <label style={styles.checkboxLabel}>
+                                        type="color"
+                                        value={fontColor}
+                                        onChange={(e) => setFontColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                            </div>
+
+                            {/* Container Color (optional) */}
+                            <div style={styles.field}>
+                                <label>Container Color <span style={styles.optional}>(optional)</span>:</label>
+                                <div style={styles.colorInputContainer}>
                                     <input
-                                        type="checkbox"
-                                        checked={disableLeadingZero}
-                                        onChange={(e) => setDisableLeadingZero(e.target.checked)}
-                                        style={styles.checkbox}
+                                        type="text"
+                                        value={containerColor}
+                                        onChange={(e) => setContainerColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#ffffff" />
+                                    <input
+                                        type="color"
+                                        value={containerColor}
+                                        onChange={(e) => setContainerColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                                <small style={styles.helpText}>
+                                    Change the container background color of the texts. If a color is chosen, it will overlap any theme's color.
+                                </small>
+                            </div>
+
+                            {/* Background Color (optional) */}
+                            <div style={styles.field}>
+                                <label>Background Color <span style={styles.optional}>(optional)</span>:</label>
+                                <div style={styles.colorInputContainer}>
+                                    <input
+                                        type="text"
+                                        value={bgColor}
+                                        onChange={(e) => setBgColor(e.target.value)}
+                                        style={styles.colorTextInput}
+                                        placeholder="#f5f5f5" />
+                                    <input
+                                        type="color"
+                                        value={bgColor}
+                                        onChange={(e) => setBgColor(e.target.value)}
+                                        style={styles.colorPicker} />
+                                </div>
+                                <small style={styles.helpText}>
+                                    Change the background color of the app. If a color is chosen, it will overlap any theme's color.
+                                </small>
+                            </div>
+
+                            {/* Background Image (optional) */}
+                            <div style={styles.field}>
+                                <label>Background Image <span style={styles.optional}>(optional)</span>:</label>
+                                <div style={{ display: "flex", gap: "8px" }}>
+                                    <input
+                                        type="text"
+                                        value={bgImage}
+                                        onChange={(e) => setBgImage(e.target.value)}
+                                        placeholder="Enter image URL"
+                                        style={{ ...styles.input, flex: 1 }}
                                     />
-                                    Disable Leading Zero
-                                </label>
+                                    <button style={styles.browseBtn}>Browse</button>
+                                </div>
+                                <small style={styles.helpText}>
+                                    The background image will stretch to fill the app height and width. If a background image is chosen, it will overlap any theme's background.
+                                </small>
                             </div>
                         </div>
                     )}
                     {activeTab === "language" && (
                         <div style={styles.languageTab}>
                             <div style={styles.field}>
-                                <label>Language</label>
+                                <label>Language:</label>
                                 <select
                                     value={selectedLanguage}
                                     onChange={(e) => setSelectedLanguage(e.target.value)}
@@ -320,7 +342,7 @@ function DigitalClockSimpleForm({ card }) {
                                     <option value="nl">Nederlands</option>
                                     <option value="nn">Norsk (nynorsk)</option>
                                     <option value="os">Ирон</option>
-                                    <option value="pa">ਪੰਜਾਬੀ</option>
+                                    <option value="pa">ਪੰਜਾਬی</option>
                                     <option value="pl">Polski</option>
                                     <option value="pt">Português</option>
                                     <option value="pt-BR">Português (Brasil)</option>
@@ -361,18 +383,17 @@ function DigitalClockSimpleForm({ card }) {
 
                 {/* Preview Popup */}
                 {showPopup && (
-                    <DigitalClockSimplePopUp
+                    <ClockBarClassicPopUp
                         onClose={() => setShowPopup(false)}
                         appName={appName}
                         tags={tags}
-                        centralBgColor={centralBgColor}
-                        borderBgColor={borderBgColor}
+                        theme={theme}
+                        timeFormat={timeFormat}
                         textFont={textFont}
                         fontColor={fontColor}
-                        timeFormat={timeFormat}
-                        disableDate={disableDate}
-                        disableAnimation={disableAnimation}
-                        disableLeadingZero={disableLeadingZero}
+                        containerColor={containerColor}
+                        bgColor={bgColor}
+                        bgImage={bgImage}
                         selectedLanguage={selectedLanguage} />
                 )}
             </div>
@@ -465,17 +486,25 @@ const styles = {
     cursor: "pointer",
     fontWeight: "500",
   },
+  browseBtn: {
+    padding: "8px 12px",
+    backgroundColor: "#e9e9e9",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
   tag: {
-    padding: "2px 5px",
-    backgroundColor: "#ccc",
+    padding: "4px 8px",
+    backgroundColor: "#e0e0e0",
     borderRadius: "4px",
     display: "flex",
     alignItems: "center",
     gap: "4px",
+    fontSize: "14px",
   },
   removeTag: {
     marginLeft: "5px",
-    backgroundColor: "red",
+    backgroundColor: "#ff6b6b",
     color: "#fff",
     border: "none",
     borderRadius: "50%",
@@ -483,6 +512,7 @@ const styles = {
     height: "16px",
     cursor: "pointer",
     lineHeight: "16px",
+    fontSize: "12px",
   },
   errorMessage: {
     display: "flex",
@@ -520,22 +550,6 @@ const styles = {
     cursor: "pointer",
     padding: "0",
   },
-  checkboxGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    marginTop: "10px",
-  },
-  checkboxLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
-  },
-  checkbox: {
-    width: "16px",
-    height: "16px",
-  },
 };
 
-export default DigitalClockSimpleForm;
+export default ClockBarClassicForm;

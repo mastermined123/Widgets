@@ -151,6 +151,15 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc: watch5   },
     {
+      id: 2901,
+      cardType: "multi_city_clock_ii",
+      title: "Multi City Clock",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Data Feed Enabled",
+      imageSrc: "https://static.vecteezy.com/system/resources/previews/011/932/844/non_2x/time-zone-clocks-free-photo.jpg"   },
+
+      {
       id: 291,
       cardType: "round_clock_modern",
       title: "Round Clock - Modern",
