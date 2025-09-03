@@ -54,6 +54,9 @@ import LcdClockForm from "../Widgets/Clock/LCD_Clock/LCD_CLock_Form";
 import ClockBarModernForm from "../Widgets/Clock/ClockBarModern/ClockBarModernForm";
 import GlowClockForm from "../Widgets/Clock/GlowClock/GlowClockForm";
 import RoundModernClockForm from "../Widgets/Clock/RoundModernClock/RoundModernClockForm";
+import TodayDateForm from "../Widgets/Clock/TodayDate/TodayDateForm";
+// import TimeAppForm from "../Widgets/Clock/TimeApp/TimeAppForm";
+import TimerForm from "../Widgets/Clock/Timer/TimerForm";
 
 
 
@@ -99,8 +102,14 @@ const renderDynamicContent = () => {
             return <ClockBarModernForm card={card} />;
         case "glow_clock":
             return <GlowClockForm card={card} />;   
-        // case "round_clock_modern":
-        //       return <RoundModernClockForm card={card} />;    
+        case "round_clock_modern":
+              return <RoundModernClockForm card={card} />; 
+        case "todays_date":
+              return <TodayDateForm card={card} />;  
+        case "timer":
+              return <TimerForm card={card} />; 
+      //  case "time_app":
+      //        return <TimeAppForm card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }

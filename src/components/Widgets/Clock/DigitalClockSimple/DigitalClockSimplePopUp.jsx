@@ -217,15 +217,15 @@ const styles = {
   },
 };
 
-// Add CSS keyframes for blinking animation
-const styleSheet = document.styleSheets[0];
-if (styleSheet && !Array.from(styleSheet.cssRules).some(rule => rule.name === 'blink')) {
-  styleSheet.insertRule(`
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-  `, styleSheet.cssRules.length);
-}
+// // Add CSS keyframes for blinking animation
+// const styleSheet = document.styleSheets[0];
+// if (styleSheet && !Array.from(styleSheet.cssRules).some(rule => rule.name === 'blink')) {
+//   styleSheet.insertRule(`
+//     @keyframes blink {
+//       0%, 50% { opacity: 1; }
+//       51%, 100% { opacity: 0; }
+//     }
+//   `, styleSheet.cssRules.length);
+// }
 
 export default DigitalClockSimplePopUp;

@@ -83,14 +83,14 @@ const styles = {
 };
 
 // Keyframes for scrolling
-const styleSheet = document.styleSheets[0];
-if (styleSheet) {
-  styleSheet.insertRule(`
-    @keyframes scroll-left {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-100%); }
-    }
-  `, styleSheet.cssRules.length);
-}
+// const styleSheet = document.styleSheets[0];
+// if (styleSheet) {
+//   styleSheet.insertRule(`
+//     @keyframes scroll-left {
+//       0% { transform: translateX(0%); }
+//       100% { transform: translateX(-100%); }
+//     }
+//   // `, styleSheet.cssRules.length);
+// }
 
 export default ExchangeSellerTwoPopUp;
