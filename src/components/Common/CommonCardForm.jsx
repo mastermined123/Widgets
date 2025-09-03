@@ -165,9 +165,9 @@ const renderDynamicContent = () => {
         case "famous_quotes_3":
           return <FamousQuotes card={card} />;
         case "health_tips":
-          return <FormEntertainMent card={card} />;
+          return <FormEntertainMent card={card} />;   
         case "ice_hockey_facts":
-          return <FormEntertainMent card={card} />;
+          return <FormEntertainMent card={card} />;   
         case "quiz_trivia":
           return <FormEntertainMent card={card} />;
         case "rugby_facts":
