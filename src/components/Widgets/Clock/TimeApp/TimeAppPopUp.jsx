@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
@@ -187,7 +188,7 @@ const TimeAppPopUp = ({
           </div>
 
           {/* Tags */}
-          {tags?.length > 0 && (
+          {/* {tags?.length > 0 && (
             <div style={styles.tagsContainer}>
               {tags.map((tag, i) => (
                 <span key={i} style={{
@@ -199,7 +200,7 @@ const TimeAppPopUp = ({
                 </span>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
