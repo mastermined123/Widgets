@@ -63,6 +63,11 @@ import WeatherAndClockForm from "../Widgets/Clock/Weather_And_Clock/WeatherAndCl
 import ClockBarClassicForm from "../Widgets/Clock/ClockBarClassic/ClockBarClassicForm";
 import TimeElapsedForm from "../Widgets/Clock/TimeElapsedClock/TimeElapsedForm";
 import TimeAppForm from "../Widgets/Clock/TimeApp/TimeAppForm"; 
+import MultiCityWeatherForm from "../Widgets/Weather/MultiCityWeather/MultiCityWeatherForm";
+import MultiCityWeatherWidgetForm from "../Widgets/Weather/MultiCityWeatherWidget/MultiCityWeatherWidgetForm";
+import MultiDayWeatherScrollingForm from "../Widgets/Weather/MultiDayWeatherScrolling/MultiDayWeatherScrollingForm";
+import SingleDayWeatherGraphForm from "../Widgets/Weather/SingleDayWeatherGraph/SingleDayWeatherGraphForm";
+import ThemableWeatherForecastForm from "../Widgets/Weather/ThemableWeatherForecast/ThemableWeatherForecastForm";
 
 
 
@@ -142,6 +147,16 @@ const renderDynamicContent = () => {
           return <SimpleWeatherForm card={card} />;
         case "multi_day_weather":
           return <MultiDayWeatherMain card={card} />;
+        case "multi_city_weather":
+          return <MultiCityWeatherForm card={card} />;          
+        case "multi_city_weather_widget":
+          return <MultiCityWeatherWidgetForm card={card} />;    
+        case "multi_day_scrolling_weather":
+          return <MultiDayWeatherScrollingForm card={card} />; 
+        case "single_day_graph_weather":
+          return <SingleDayWeatherGraphForm card={card} />; 
+        case "themable_weather_forecast":
+          return <ThemableWeatherForecastForm card={card} />; 
         default:
           return <AmericanFootball card={card} />;
       }

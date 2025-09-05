@@ -1465,7 +1465,7 @@ const categories = [
       showWorldIcon: true,
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
-      imageSrc: "https://support.actiontiles.com/s/attachments/19647/12/13735/16e7bc6ed0386aae1af4c551f37a5c83.gif",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOAKER-Q088IJ2IIbpDwFwDcuzoIjPFZxeDKrbSvxPeng0jAdga5ZYUSyVCZFrAuzGo2A&usqp=CAU",
     },
     {
       id: 152,
