@@ -1056,7 +1056,17 @@ const categories = [
   id: 9, 
   name: "Other", 
   type: "other",
-  cards: [    
+  cards: [   
+        {
+      id: 91,
+      cardType: "airport_flight_status",
+      title: "Airport Flight Status",
+      showWorldIcon: true,
+      showDatabaseIcon: false,
+      textContainer: "Data Feed Enabled",
+      imageSrc: airport_flight_status,
+    },
+ 
     {
       id: 92,
       cardType: "audio_announcement_app",
@@ -1065,15 +1075,6 @@ const categories = [
       showDatabaseIcon: true,
       textContainer: "Data Feed Enabled",
       imageSrc: audio_announcement_app,
-    },
-        {
-      id: 95,
-      cardType: "weather_exchange_ticker",
-      title: "Weather + Exchange - Ticker",
-      showWorldIcon: true,
-      showDatabaseIcon: true,
-      textContainer: "Data Feed Enabled",
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeIGsdF3S62W8eOqFJZB3zzadTqf3uX82HUQ&s",
     },
     {
       id: 93,
@@ -1084,17 +1085,6 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc: flight_status,
     },
-
-
-    {
-      id: 91,
-      cardType: "airport_flight_status",
-      title: "Airport Flight Status",
-      showWorldIcon: true,
-      showDatabaseIcon: false,
-      textContainer: "Data Feed Enabled",
-      imageSrc: airport_flight_status,
-    },
     {
       id: 94,
       cardType: "hdmi_input",
@@ -1104,6 +1094,16 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLifEzS0VtGR2hxM91msDulwtJMLVcdyTQdA&s",
     }
+,
+    {
+      id: 95,
+      cardType: "weather_exchange_ticker",
+      title: "Weather + Exchange - Ticker",
+      showWorldIcon: true,
+      showDatabaseIcon: true,
+      textContainer: "Data Feed Enabled",
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeIGsdF3S62W8eOqFJZB3zzadTqf3uX82HUQ&s",
+    },
   ]
 }
 
@@ -1234,7 +1234,7 @@ const categories = [
     },
     {
       id: 114,
-      cardType: "soccer_league_table_2",
+      cardType: "soccer_league_table_feed",
       title: "Soccer league table",
       showWorldIcon: true,
       showDatabaseIcon: true,

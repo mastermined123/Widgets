@@ -68,6 +68,8 @@ import MultiCityWeatherWidgetForm from "../Widgets/Weather/MultiCityWeatherWidge
 import MultiDayWeatherScrollingForm from "../Widgets/Weather/MultiDayWeatherScrolling/MultiDayWeatherScrollingForm";
 import SingleDayWeatherGraphForm from "../Widgets/Weather/SingleDayWeatherGraph/SingleDayWeatherGraphForm";
 import ThemableWeatherForecastForm from "../Widgets/Weather/ThemableWeatherForecast/ThemableWeatherForecastForm";
+import HdmiInputForm from "../Widgets/Other/HDMI Input/HdmiInputForm";
+import SoccerleaugueTableFeedForm from "../Widgets/Sports/SoccerLeaugueTableFeed/SoccerLeaugueFeedForm";
 
 
 
@@ -234,6 +236,8 @@ const renderDynamicContent = () => {
           return <FlightStatusForm card={card} />;
         case "airport_flight_status":
           return <AirPortFlightStatusForm card={card} />;
+        case "hdmi_input":
+          return <HdmiInputForm card={card} />; 
         default:
           return <AmericanFootball card={card} />;
       }
@@ -362,6 +366,8 @@ const renderDynamicContent = () => {
           return <SoccerTableFrom  card={card} />;
       case "soccer_league_table":
           return <SoccerLeaugueTableForm  card={card} />;
+      case "soccer_league_table_feed":
+          return <SoccerleaugueTableFeedForm  card={card} />;
       default:
           return <AmericanFootball card={card} />;
         }
