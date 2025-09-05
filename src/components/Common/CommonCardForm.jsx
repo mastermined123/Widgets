@@ -70,7 +70,10 @@ import SingleDayWeatherGraphForm from "../Widgets/Weather/SingleDayWeatherGraph/
 import ThemableWeatherForecastForm from "../Widgets/Weather/ThemableWeatherForecast/ThemableWeatherForecastForm";
 import HdmiInputForm from "../Widgets/Other/HDMI Input/HdmiInputForm";
 import SoccerleaugueTableFeedForm from "../Widgets/Sports/SoccerLeaugueTableFeed/SoccerLeaugueFeedForm";
-
+import SmallWeatherAppMain from "../Widgets/Weather/SmallWeatherApp/SmallWeatherAppMain";
+import WeatherForecastTallandBarMain from "../Widgets/Weather/WeatherForecastTallandBar/WeatherForecastTallandBarMain";
+import WeatherrApp from "../Widgets/Weather/Weatherr/WeatherrApp";
+import WeatherAppp from "../Widgets/Weather/WeatherForecast/WeatherAppp";
 
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
@@ -150,15 +153,23 @@ const renderDynamicContent = () => {
         case "multi_day_weather":
           return <MultiDayWeatherMain card={card} />;
         case "multi_city_weather":
-          return <MultiCityWeatherForm card={card} />;          
+          return <MultiCityWeatherForm card={card} />;
         case "multi_city_weather_widget":
-          return <MultiCityWeatherWidgetForm card={card} />;    
+          return <MultiCityWeatherWidgetForm card={card} />;
         case "multi_day_scrolling_weather":
-          return <MultiDayWeatherScrollingForm card={card} />; 
+          return <MultiDayWeatherScrollingForm card={card} />;
         case "single_day_graph_weather":
-          return <SingleDayWeatherGraphForm card={card} />; 
+          return <SingleDayWeatherGraphForm card={card} />;
         case "themable_weather_forecast":
-          return <ThemableWeatherForecastForm card={card} />; 
+          return <ThemableWeatherForecastForm card={card} />;
+        case "small_weather_app":
+          return <SmallWeatherAppMain card={card} />;
+        case "weather_forecast_tall_bar":
+          return <WeatherForecastTallandBarMain card={card} />;
+        case "weather_forecast":
+          return <WeatherAppp card={card} />;
+        case "weather":
+          return <WeatherrApp card={card} />;
         default:
           return <AmericanFootball card={card} />;
       }
@@ -182,9 +193,9 @@ const renderDynamicContent = () => {
         case "famous_quotes_3":
           return <FamousQuotes card={card} />;
         case "health_tips":
-          return <FormEntertainMent card={card} />;
+          return <FormEntertainMent card={card} />;   
         case "ice_hockey_facts":
-          return <FormEntertainMent card={card} />;
+          return <FormEntertainMent card={card} />;   
         case "quiz_trivia":
           return <FormEntertainMent card={card} />;
         case "rugby_facts":
