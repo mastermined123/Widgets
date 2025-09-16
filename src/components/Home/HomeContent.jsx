@@ -22,7 +22,6 @@ const HomeContent = ({ categories, onClose }) => {
   }
 
 
-  console.log('hmyn',selectedCard);
 
   return (
 <>

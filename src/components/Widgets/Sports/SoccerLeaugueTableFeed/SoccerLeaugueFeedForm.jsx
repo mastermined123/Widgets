@@ -1,37 +1,43 @@
-/* eslint-disable no-unused-vars */
-// BirthdayAnnouncement.jsx
 import React, { useState } from "react";
 import SoccerleaugueTableFeedPopup from "./SoccerleaugueFeedPopup";
 
 const SoccerleaugueTableFeedForm = ({ card }) => {
+  console.log("card", card);
 
-    console.log('card',card)
   const [activeTab, setActiveTab] = useState("settings");
-  const [tags, setTags] = useState([]);
+
   const [appName, setAppName] = useState("");
-  const [dataFeed, setDataFeed] = useState("");
-  const [duration, setDuration] = useState("");
-  const [titleFontColor, setTitleFontColor] = useState("");
-  const [cardFontColor, setCardFontColor] = useState("");
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState("");
+  const [dataFeedFile, setDataFeedFile] = useState(null);
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [group, setGroup] = useState("");
+  const [championshipLogo, setChampionshipLogo] = useState(null);
+  const [textFont, setTextFont] = useState("");
+  const [customHeaderColor, setCustomHeaderColor] = useState("");
   const [customBgColor, setCustomBgColor] = useState("");
   const [customBgImage, setCustomBgImage] = useState(null);
-  const [disableBackground, setDisableBackground] = useState(false);
-  const [disableAnimations, setDisableAnimations] = useState(false);
-  const [showCurrentMonth, setShowCurrentMonth] = useState(true);
-  const [hideDates, setHideDates] = useState(false);
-  const [dataFeedFile, setDataFeedFile] = useState(null);
 
   const [language, setLanguage] = useState("en");
   const [appLabels, setAppLabels] = useState({
-    birthdayAnnouncement: "",
-    noBirthdays: ""
+    MP: "",
+    W: "",
+    D: "",
+    L: "",
+    F: "",
+    A: "",
+    GD: "",
+    Pts: "",
   });
+
   const [showPopup, setShowPopup] = useState(false);
 
+  // Tag handlers
   const addTag = () => {
-    if (dataFeed.trim()) {
-      setTags([...tags, dataFeed.trim()]);
-      setDataFeed("");
+    if (tagInput.trim()) {
+      setTags([...tags, tagInput.trim()]);
+      setTagInput("");
     }
   };
 
@@ -40,21 +46,22 @@ const SoccerleaugueTableFeedForm = ({ card }) => {
     setTags(newTags);
   };
 
+  // Save handler
   const handleSave = () => {
     console.log({
       appName,
       tags,
-      duration,
-      titleFontColor,
-      cardFontColor,
+      dataFeedFile,
+      title,
+      subtitle,
+      group,
+      championshipLogo,
+      textFont,
+      customHeaderColor,
       customBgColor,
       customBgImage,
-      disableBackground,
-      disableAnimations,
-      showCurrentMonth,
-      hideDates,
       language,
-      appLabels
+      appLabels,
     });
     alert("Saved! Check console.");
   };
@@ -62,12 +69,15 @@ const SoccerleaugueTableFeedForm = ({ card }) => {
   return (
     <div style={styles.container}>
       {/* Left Portion */}
-
       <div style={styles.left}>
-
-                      <label style={{ ...styles.field, fontWeight: "bold" }} >{card.title}</label>
-        {card.imageSrc && <img src={card.imageSrc} alt={card.title} style={styles.image} />}
-        <p>This app will show a list of birthday events matching the filtering criteria.</p>
+        <label style={{ ...styles.field, fontWeight: "bold" }}>{card.title}</label>
+        {card.imageSrc && (
+          <img src={card.imageSrc} alt={card.title} style={styles.image} />
+        )}
+        <p>
+          This app will show a soccer league table feed based on the configured
+          data.
+        </p>
         <p>Better Viewed Like This:</p>
         <div style={styles.previewBoxes}>
           <div style={{ ...styles.box, width: "100px", height: "60px" }}></div>
@@ -77,6 +87,7 @@ const SoccerleaugueTableFeedForm = ({ card }) => {
 
       {/* Right Portion */}
       <div style={styles.right}>
+        {/* Tabs */}
         <div style={styles.tabs}>
           <button
             style={activeTab === "settings" ? styles.activeTab : styles.tab}
@@ -92,38 +103,50 @@ const SoccerleaugueTableFeedForm = ({ card }) => {
           </button>
         </div>
 
+        {/* Tab Content */}
         <div style={styles.tabContent}>
           {activeTab === "settings" && (
             <div>
+              {/* App Name */}
               <div style={styles.field}>
                 <label>App Name:</label>
                 <input
                   type="text"
                   value={appName}
-                  onChange={e => setAppName(e.target.value)}
+                  onChange={(e) => setAppName(e.target.value)}
                   style={styles.input}
                 />
               </div>
 
+              {/* Tags */}
               <div style={styles.field}>
                 <label>Tags (optional):</label>
                 <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
                   {tags?.map((tag, i) => (
                     <span key={i} style={styles.tag}>
-                      {tag} <button onClick={() => removeTag(i)} style={styles.removeTag}>x</button>
+                      {tag}{" "}
+                      <button
+                        onClick={() => removeTag(i)}
+                        style={styles.removeTag}
+                      >
+                        x
+                      </button>
                     </span>
                   ))}
                   <input
                     type="text"
-                    value={dataFeed}
-                    onChange={e => setDataFeed(e.target.value)}
+                    value={tagInput}
+                    onChange={(e) => setTagInput(e.target.value)}
                     placeholder="Enter tag"
                     style={{ ...styles.input, flex: "1" }}
-                    onKeyDown={e => e.key === "Enter" && (e.preventDefault(), addTag())}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && (e.preventDefault(), addTag())
+                    }
                   />
                 </div>
               </div>
 
+              {/* Data Feed */}
               <div style={styles.field}>
                 <label>Data Feed:</label>
                 <input
@@ -134,115 +157,273 @@ const SoccerleaugueTableFeedForm = ({ card }) => {
                 />
               </div>
 
+              {/* Title */}
               <div style={styles.field}>
-                <label>Duration:</label>
-                <input type="text" value={duration} onChange={e => setDuration(e.target.value)} style={styles.input} />
+                <label>Title:</label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  style={styles.input}
+                />
               </div>
 
+              {/* Subtitle */}
               <div style={styles.field}>
-                <label>Filtering Options:</label>
-                <select style={styles.input}>
-                  <option>Today Birthday Wishing</option>
-                  <option>This Week</option>
-                  <option>This Month</option>
-                </select>
+                <label>Subtitle (optional):</label>
+                <input
+                  type="text"
+                  value={subtitle}
+                  onChange={(e) => setSubtitle(e.target.value)}
+                  style={styles.input}
+                />
               </div>
 
+              {/* Group */}
               <div style={styles.field}>
-                <label>Title Font Color:</label>
-                <input type="color" value={titleFontColor} onChange={e => setTitleFontColor(e.target.value)} />
+                <label>Group:</label>
+                <input
+                  type="text"
+                  value={group}
+                  onChange={(e) => setGroup(e.target.value)}
+                  style={styles.input}
+                />
               </div>
 
+              {/* Championship Logo */}
               <div style={styles.field}>
-                <label>Card Font Color (optional):</label>
-                <input type="color" value={cardFontColor} onChange={e => setCardFontColor(e.target.value)} />
+                <label>Championship Logo (optional):</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setChampionshipLogo(e.target.files[0])}
+                  style={styles.input}
+                />
               </div>
 
+              {/* Text Font */}
+              <div style={styles.field}>
+                <label>Text Font (optional):</label>
+                <input
+                  type="text"
+                  value={textFont}
+                  onChange={(e) => setTextFont(e.target.value)}
+                  style={styles.input}
+                  placeholder="e.g., Arial, Roboto"
+                />
+              </div>
+
+              {/* Custom Header Color */}
+              <div style={styles.field}>
+                <label>Custom Header Color (optional):</label>
+                <input
+                  type="color"
+                  value={customHeaderColor}
+                  onChange={(e) => setCustomHeaderColor(e.target.value)}
+                />
+              </div>
+
+              {/* Custom Background Color */}
               <div style={styles.field}>
                 <label>Custom Background Color (optional):</label>
-                <input type="color" value={customBgColor} onChange={e => setCustomBgColor(e.target.value)} />
+                <input
+                  type="color"
+                  value={customBgColor}
+                  onChange={(e) => setCustomBgColor(e.target.value)}
+                />
               </div>
 
+              {/* Custom Background Image */}
               <div style={styles.field}>
                 <label>Custom Background Image (optional):</label>
-                <input type="file" onChange={e => setCustomBgImage(e.target.files[0])} />
-              </div>
-
-              <div style={styles.checkboxGroup}>
-                <label><input type="checkbox" checked={disableBackground} onChange={e => setDisableBackground(e.target.checked)} /> Disable Background</label>
-                <label><input type="checkbox" checked={disableAnimations} onChange={e => setDisableAnimations(e.target.checked)} /> Disable Animations</label>
-                <label><input type="checkbox" checked={showCurrentMonth} onChange={e => setShowCurrentMonth(e.target.checked)} /> Show Current Month</label>
-                <label><input type="checkbox" checked={hideDates} onChange={e => setHideDates(e.target.checked)} /> Hide Dates</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setCustomBgImage(e.target.files[0])}
+                />
               </div>
             </div>
           )}
 
           {activeTab === "language" && (
             <div>
+              {/* Language */}
               <div style={styles.field}>
                 <label>Language:</label>
-                <select value={language} onChange={e => setLanguage(e.target.value)} style={styles.input}>
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  style={styles.input}
+                >
                   <option value="en">English</option>
                   <option value="es">Spanish</option>
                   <option value="fr">French</option>
                 </select>
+                <p style={{ fontSize: "12px", color: "#555", marginTop: "5px" }}>
+                  Changing the language will affect any text displayed on the
+                  app as well as how dates and numbers are formatted.
+                </p>
               </div>
 
+              {/* App Labels */}
               <div style={styles.field}>
                 <label>App Labels</label>
-                <p>These labels will be displayed in the app. You can choose to override them if the default translation does not fit your needs.</p>
+                <p>
+                  These labels will be displayed in the app. You can choose to
+                  override them if the default translation shown below does not
+                  fit your needs.
+                </p>
               </div>
 
-              <div style={styles.field}>
-                <input type="text" value={appLabels.birthdayAnnouncement} onChange={e => setAppLabels({...appLabels, birthdayAnnouncement: e.target.value})} style={styles.input}/>
-              </div>
-
-              <div style={styles.field}>
-                <label>No Birthdays to Show:</label>
-                <input type="text" value={appLabels.noBirthdays} onChange={e => setAppLabels({...appLabels, noBirthdays: e.target.value})} style={styles.input}/>
-              </div>
+              {/* Labels fields */}
+              {Object.keys(appLabels).map((key) => (
+                <div style={styles.field} key={key}>
+                  <input
+                    type="text"
+                    placeholder={key}
+                    value={appLabels[key]}
+                    onChange={(e) =>
+                      setAppLabels({ ...appLabels, [key]: e.target.value })
+                    }
+                    style={styles.input}
+                  />
+                </div>
+              ))}
             </div>
           )}
         </div>
 
+        {/* Save + Preview */}
         <div style={styles.fixedButtons}>
-          <button onClick={handleSave} style={styles.saveBtn}>Save</button>
-        <button onClick={() => setShowPopup(true)} style={styles.previewBtn}>Preview</button>
+          <button onClick={handleSave} style={styles.saveBtn}>
+            Save
+          </button>
+          <button onClick={() => setShowPopup(true)} style={styles.previewBtn}>
+            Preview
+          </button>
         </div>
 
-
-          {showPopup && (
-        <SoccerleaugueTableFeedPopup
-          image={customBgImage ? URL.createObjectURL(customBgImage) : card.imageSrc}
-          duration={duration ? parseInt(duration) : 5}
-          onClose={() => setShowPopup(false)}
-        />
-      )}
-
+        {/* Popup */}
+        {showPopup && (
+          <SoccerleaugueTableFeedPopup
+            image={
+              customBgImage ? URL.createObjectURL(customBgImage) : card.imageSrc
+            }
+            duration={5}
+            onClose={() => setShowPopup(false)}
+          />
+        )}
       </div>
     </div>
   );
 };
 
 const styles = {
-  container: { display: "flex", width: "96%", border: "1px solid #ddd", borderRadius: "8px", overflow: "hidden", marginTop: "1px", position: "relative" },
-  left: { flex: 0.35, borderRight: "3px solid #ddd", backgroundColor: "#f5f5f5", display: "flex", flexDirection: "column", alignItems: "center", padding: "10px", overflowY: "auto" },
-  right: { flex: 0.65, padding: "15px", display: "flex", flexDirection: "column", position: "relative" },
-  image: { width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "10px" },
-  previewBoxes: { display: "flex", gap: "10px", marginTop: "10px", marginBottom: "20px" },
-  box: { backgroundColor: "#ddd", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "4px" },
+  container: {
+    display: "flex",
+    width: "96%",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    overflow: "hidden",
+    marginTop: "1px",
+    position: "relative",
+  },
+  left: {
+    flex: 0.35,
+    borderRight: "3px solid #ddd",
+    backgroundColor: "#f5f5f5",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "10px",
+    overflowY: "auto",
+  },
+  right: {
+    flex: 0.65,
+    padding: "15px",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  },
+  image: {
+    width: "100%",
+    height: "200px",
+    objectFit: "cover",
+    borderRadius: "8px",
+    marginBottom: "10px",
+  },
+  previewBoxes: {
+    display: "flex",
+    gap: "10px",
+    marginTop: "10px",
+    marginBottom: "20px",
+  },
+  box: {
+    backgroundColor: "#ddd",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "4px",
+  },
   tabs: { display: "flex", gap: "10px", marginBottom: "15px" },
-  tab: { padding: "5px 15px", cursor: "pointer", backgroundColor: "#eee", border: "none", borderRadius: "4px" },
-  activeTab: { padding: "5px 15px", cursor: "pointer", backgroundColor: "#005481", color: "#fff", border: "none", borderRadius: "4px" },
+  tab: {
+    padding: "5px 15px",
+    cursor: "pointer",
+    backgroundColor: "#eee",
+    border: "none",
+    borderRadius: "4px",
+  },
+  activeTab: {
+    padding: "5px 15px",
+    cursor: "pointer",
+    backgroundColor: "#005481",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+  },
   tabContent: { flex: 1, overflowY: "auto" },
   field: { display: "flex", flexDirection: "column", marginBottom: "10px" },
   input: { padding: "5px", borderRadius: "4px", border: "1px solid #ccc" },
-  checkboxGroup: { display: "flex", flexDirection: "column", gap: "5px", marginTop: "10px" },
-  fixedButtons: { position: "absolute", bottom: "10px", right: "10px", display: "flex", gap: "10px" },
-  saveBtn: { padding: "8px 12px", backgroundColor: "#005481", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer" },
-  previewBtn: { padding: "8px 12px", backgroundColor: "#888", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer" },
-  tag: { padding: "2px 5px", backgroundColor: "#ccc", borderRadius: "4px", display: "flex", alignItems: "center" },
-  removeTag: { marginLeft: "5px", backgroundColor: "red", color: "#fff", border: "none", borderRadius: "50%", width: "16px", height: "16px", cursor: "pointer" }
+  fixedButtons: {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    display: "flex",
+    gap: "10px",
+  },
+  saveBtn: {
+    padding: "8px 12px",
+    backgroundColor: "#005481",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  previewBtn: {
+    padding: "8px 12px",
+    backgroundColor: "#888",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  tag: {
+    padding: "2px 5px",
+    backgroundColor: "#ccc",
+    borderRadius: "4px",
+    display: "flex",
+    alignItems: "center",
+  },
+  removeTag: {
+    marginLeft: "5px",
+    backgroundColor: "red",
+    color: "#fff",
+    border: "none",
+    borderRadius: "50%",
+    width: "16px",
+    height: "16px",
+    cursor: "pointer",
+  },
 };
 
 export default SoccerleaugueTableFeedForm;

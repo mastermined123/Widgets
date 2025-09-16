@@ -74,6 +74,12 @@ import SmallWeatherAppMain from "../Widgets/Weather/SmallWeatherApp/SmallWeather
 import WeatherForecastTallandBarMain from "../Widgets/Weather/WeatherForecastTallandBar/WeatherForecastTallandBarMain";
 import WeatherrApp from "../Widgets/Weather/Weatherr/WeatherrApp";
 import WeatherAppp from "../Widgets/Weather/WeatherForecast/WeatherAppp";
+import ExchangeRateChartForm from "../Widgets/Finance/ExchangeRateChart/ExchangeRateChartForm";
+import ExchangeRateTableForm from "../Widgets/Finance/ExchangeRateTable/ExchangeRateTableForm";
+import MiniChartForm from "../Widgets/Finance/MiniChart/MiniChartForm";
+import MultiCurrenctExchangeRateChartForm from "../Widgets/Finance/MultiCurrencyExchangeRate/MultiCurrenctExchangeRateChartForm";
+import SingleExchangeRateChartForm from "../Widgets/Finance/SingleExchangeRate/SingleExchangeRateChartForm";
+import SingleExchangeRateChartFormOriginial from "../Widgets/Finance/SingleExchangeRateChartOriginal/SingleExchangeRateChartForm_Originial";
 
 
 const CommonCardForm = ({ categories, card, onClose, onBack }) => {
@@ -221,7 +227,19 @@ const renderDynamicContent = () => {
           return <ExchangeSellerTwo card={card} />;
         case "exchange_rate":
           return <ExchangeRateForm card={card} />;
-        default:
+        case "exchange_rate_chart":
+          return <ExchangeRateChartForm card={card} />;
+        case "exchange_rate_table":
+          return <ExchangeRateTableForm card={card} />;
+        case "mini_chart":
+          return <MiniChartForm card={card} />;
+        case "multi_currency_exchange_rate":
+          return <MultiCurrenctExchangeRateChartForm card={card} />;
+        case "single_exchange_rate":
+          return <SingleExchangeRateChartForm card={card} />;
+        case "single_exchange_rate_chart":
+          return <SingleExchangeRateChartFormOriginial card={card} />;
+          default:
           return <AmericanFootball card={card} />;
       }
 

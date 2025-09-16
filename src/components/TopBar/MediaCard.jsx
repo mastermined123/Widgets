@@ -12,48 +12,56 @@ import {
 
 const MediaCards = ({onAppClick}) => {
 
+const baseURL = "https://dev.app.hd2.menu";
 
 const cardData = [
-  {
-    icon: FaCloudUploadAlt,
-    title: "Upload",
-    
-  },
-  {
-    icon: FaRocket,
-    title: "App",
-      onClick: () => onAppClick?.()
-
-    
-  },
-  {
-    icon: FaDesktop,
-    title: "Campaign",
-    
-  },
-  {
-    icon: FaFolder,
-    title: "Composition",
-    
-  },
-  {
-    icon: FaPollH,
-    title: "Data Feed",    
-  },
-  {
-    icon: FaLayerGroup,
-    title: "Folder",
-    
-  },
-  {
-    icon: FaBullseye,
-    title: "Playlist",
-  },
-  {
-    icon: FaFileAlt,
-    title: "Audio Playlist",    
-  }
+  { 
+    icon: FaCloudUploadAlt, 
+    title: "Upload", 
+    route: `${baseURL}/admin/admin_files/display/view/grid_view/all`, 
+    color: "#e3f2fd" 
+  },  
+  { 
+    icon: FaRocket, 
+    title: "App", 
+    color: "#f3e5f5", 
+    onClick: () => onAppClick?.() 
+  },  
+  { 
+    icon: FaDesktop, 
+    title: "Campaign", 
+    route: `https://hd2.dev.app.hd2.menu`, 
+    color: "#e8f5e9" 
+  },  
+  { 
+    icon: FaFolder, 
+    title: "Composition", 
+    route: `https://editor.app.hd2.menu/`, 
+    color: "#fff3e0" 
+  },  
+  { 
+    icon: FaPollH, 
+    title: "Data Feed", 
+    color: "#ede7f6" 
+  },  
+  { 
+    icon: FaLayerGroup, 
+    title: "Folder", 
+    color: "#fce4ec" 
+  },  
+  { 
+    icon: FaBullseye, 
+    title: "Playlist", 
+    color: "#ffebee" 
+  },  
+  { 
+    icon: FaFileAlt, 
+    title: "Audio Playlist", 
+    color: "#e0f7fa" 
+  }  
 ];
+
+
 
 
 const [activeCard, setActiveCard] = useState(null); 
@@ -74,35 +82,44 @@ const [activeCard, setActiveCard] = useState(null);
     border: activeCard === card.title ? "2px solid #d32f2f" : "none",
   }}
 >
-              <div style={styles.cardIcon}>
-                <IconComponent size={24} color="white" />
-              </div>
+<div style={{ ...styles.cardIcon, backgroundColor: card.color }}>
+  <IconComponent size={24} color="#555" /> {/* neutral dark icon */}
+</div>
+
 <button
   onClick={() => {
     setActiveCard(card.title);
-     card.onClick?.();
-        }}
+    if (card.route) {
+      window.location.href = card.route;
+    } else {
+      card.onClick?.();
+    }
+  }}
   style={{
     ...styles.addBtn,
-    backgroundColor: activeCard === card.title ? "#d32f2f" : "white",
-    color: activeCard === card.title ? "#fff" : "#d32f2f",
+    border: `2px solid ${card.color}`,
+    backgroundColor:
+      activeCard === card.title ? card.color : "white",
+    color: activeCard === card.title ? "#000" : "#555",
+    transition: "background-color 0.3s, color 0.3s",
   }}
   onMouseEnter={(e) => {
-    if (activeCard !== card.title) {   // 👈 active wale pe hover effect mat lagao
-      e.target.style.backgroundColor = "#d32f2f";
-      e.target.style.color = "#fff";
+    if (activeCard !== card.title) {
+      e.target.style.backgroundColor = card.color;
+      e.target.style.color = "#000";
     }
   }}
   onMouseLeave={(e) => {
     if (activeCard !== card.title) {
       e.target.style.backgroundColor = "white";
-      e.target.style.color = "#d32f2f";
+      e.target.style.color = "#555";
     }
   }}
 >
   <span style={{ marginRight: "5px" }}>+</span>
   {card.title}
 </button>
+
 
             </div>
           );

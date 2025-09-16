@@ -1259,7 +1259,6 @@ const categories = [
       textContainer: "Data Feed Enabled",
       imageSrc: "https://cdn.pixabay.com/photo/2023/02/28/01/50/qr-code-7819652_1280.jpg",
     },
-
     {
       id: 121,
       cardType: "message_app",

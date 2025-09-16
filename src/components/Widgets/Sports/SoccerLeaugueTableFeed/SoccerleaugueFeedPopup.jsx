@@ -58,9 +58,9 @@ const styles = {
     zIndex: 2000,
   },
   popup: {
-    width: "500px",
+    width: "100%",
+    height: "100%",
     background: "#fff",
-    borderRadius: "8px",
     boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
     overflow: "hidden",
     display: "flex",

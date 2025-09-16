@@ -52,12 +52,16 @@ export default function Galley() {
             <img
               src={item.src}
               alt={item.title}
+                crossOrigin="anonymous"
+
               style={{ width: "100%", height: "100px", objectFit: "cover" }}
             />
           ) : (
             <video
               src={item.src}
               controls
+                crossOrigin="anonymous"
+
               style={{ width: "100%", height: "100px", objectFit: "cover" }}
             />
           )}
